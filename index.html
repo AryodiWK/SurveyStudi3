@@ -325,7 +325,7 @@ body{padding:0!important;background:#e9eeec;overflow:hidden}
 <script>
 /* ================= state ================= */
 const COND=(window.__INIT&&window.__INIT.cond)?{a:window.__INIT.cond.a,b:window.__INIT.cond.b}:{a:Math.random()<.5?'rd':'k',b:Math.random()<.5?'of':'ne'};
-const WEB_VERSION='20261118-1425';
+const WEB_VERSION='20261118-1534';
 const newPid=()=>{try{return crypto.randomUUID();}catch(e){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);}};
 const newCode=()=>('S3-'+Math.random().toString(36).slice(2,7)).toUpperCase();
 let R={_start:Date.now(),DEVICE:matchMedia('(pointer:coarse)').matches?'mobile':'desktop',PID:newPid(),CODE:newCode()}, cur='welcome', chatState=null, sumTimer=null;
@@ -375,7 +375,7 @@ function flow(){
   if(R.consent==='Tidak') return ['welcome','declined'];
   f.push('s1','aff','fb');
   if(R.fb==='Tidak punya'){ f.push('noelig'); return f; }
-  f.push('fb1','fb2','fbc','fbatt','fbsim','fbprior','fbknow','y0','role','act','freq');
+  f.push('fb1','fb2','fbex','fbc','fbatt','fbsim','fbprior','fbknow','y0','role','act','freq');
   f.push('s2','a_intro','a_juang');
   if(COND.a==='rd'){
     f.push('a_now','a_items','a_conf');
@@ -513,6 +513,7 @@ function page(id){
   if(id==='fbc') return likertPage('CLOSE_T',`Tentang <span class="pill">${tm}</span>.`,`Seberapa dekat Anda dengan ${tm}?`,1,1,'Tidak dekat sama sekali','Sangat dekat');
   if(id==='fbatt') return likertPage('ATT_GT','Penilaian umum Anda.',`Bagaimana perasaan Anda terhadap ${gt} secara umum?`,1,1,'Sangat negatif','Sangat positif');
   if(id==='fbsim') return likertPage('SIM_GT','Penilaian umum Anda.',`Menurut Anda, seberapa dekat ${gt} dengan ${g} dalam ajaran dan kebiasaannya?`,1,1,'Sangat jauh','Sangat dekat');
+  if(id==='fbex') return {body:`<h3>Apakah <span class="pill">${tm}</span> dulu pernah ikut <span class="pill">${g}</span>?</h3>${opts('EX_G_T',['Pernah','Tidak pernah','Tidak tahu'],{autoNext:true})}`,ok:()=>!!R.EX_G_T};
   if(id==='fbknow') return {body:`<h3>Selain ${tm}, kira-kira berapa orang di <span class="pill">${gt}</span> yang Anda kenal secara pribadi?</h3><p class="qhint">Kenal secara pribadi, bukan sekadar tahu nama atau wajahnya.</p>${opts('KNOW_GT',['Tidak ada','1–2 orang','3–5 orang','6–10 orang','11–25 orang','Lebih dari 25 orang'],{autoNext:true})}`,ok:()=>!!R.KNOW_GT};
   if(id==='fbprior') return {body:`<h3>Apakah Anda pernah ikut kegiatan <span class="pill">${gt}</span>?</h3>${opts('PRIOR_GT',['Belum pernah','Pernah, sekali atau dua kali','Pernah, beberapa kali','Sering'],{autoNext:true})}`,ok:()=>!!R.PRIOR_GT};
   if(id==='fita') return likertPage('FIT_A','Tentang gambar perjalanan di bagian "Cerita Anda".','Seberapa sesuai gambar perjalanan tadi dengan pengalaman Anda yang sebenarnya?',1,1,'Sama sekali tidak sesuai','Sangat sesuai');
