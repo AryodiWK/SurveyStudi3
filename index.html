@@ -1,0 +1,1111 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<script>window.__INIT={endpoint:'https://script.google.com/macros/s/AKfycbxlrXP4Q5FMgXysUPKddUo5YJ_kwzeUM4o_O-zkzf0uoc7oocdnG8z1zqPsMINFC37Txw/exec',src:(new URLSearchParams(location.search).get('src')||'').slice(0,40)};</script>
+<title>Survei Pengalaman Berkelompok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#eef2f0; --panel:#ffffff; --fg:#17201d; --muted:#5d6b66; --line:#d6dedb;
+  --accent:#0f766e; --accent-soft:#d8efeb; --warn:#b45309;
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1312; --panel:#171e1c; --fg:#e7eeeb; --muted:#9aa8a3; --line:#2a3431; --accent:#3fb8a9; --accent-soft:#173a35; --warn:#f0a24a; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1312; --panel:#171e1c; --fg:#e7eeeb; --muted:#9aa8a3; --line:#2a3431; --accent:#3fb8a9; --accent-soft:#173a35; --warn:#f0a24a; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.5;padding:24px max(16px,env(safe-area-inset-left)) 40px max(16px,env(safe-area-inset-right))}
+.wrap{max-width:1180px;margin:0 auto}
+.eyebrow{font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(24px,4vw,32px);line-height:1.15;margin:6px 0 6px;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:760px;margin:0 0 20px}
+.layout{display:grid;grid-template-columns:400px minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:900px){.layout{grid-template-columns:1fr}}
+
+/* ===== phone ===== */
+.device{width:100%;max-width:390px;margin:0 auto;background:#0b0f0e;border-radius:48px;padding:12px;box-shadow:0 24px 60px rgba(0,0,0,.25),inset 0 0 0 2px #2a2f2e}
+.app{--s-bg:#ffffff;--s-fg:#1a2421;--s-muted:#66736f;--s-line:#dfe5e3;--s-acc:#0f766e;--s-acc2:#0c5f58;--s-soft:#e3f3f0;--s-card:#f6f8f7;
+  color-scheme:light;position:relative;height:760px;max-height:calc(100svh - 60px);min-height:600px;background:var(--s-bg);color:var(--s-fg);border-radius:38px;overflow:hidden;display:flex;flex-direction:column;font-size:15px;line-height:1.5}
+.sbar{flex:none;height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 26px 0 30px;font:600 14px var(--font);position:relative;z-index:5}
+.sbar .notch{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:110px;height:30px;background:#0b0f0e;border-radius:20px}
+.sbar .ic{display:flex;gap:6px;align-items:center}
+.abar{flex:none;padding:4px 16px 10px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid transparent}
+.abar .row{display:flex;align-items:center;gap:10px;min-height:32px}
+.abar .back{all:unset;cursor:pointer;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:var(--s-fg)}
+.abar .back:hover{background:var(--s-card)}
+.abar .back[hidden]{visibility:hidden;display:grid}
+.abar .sec{flex:1;font-size:12.5px;font-weight:700;color:var(--s-muted);text-align:center}
+.abar .sp{width:32px}
+.prog{height:5px;border-radius:5px;background:var(--s-line);overflow:hidden}
+.progrow{display:flex;align-items:center;gap:8px}.progrow .prog{flex:1}#progpct{font-size:11.5px;font-weight:800;color:var(--s-muted);min-width:32px;text-align:right;font-variant-numeric:tabular-nums}
+.neg{color:#b42318;font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.dnow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 10px;font-size:13px;font-weight:800}.dnow span{padding:4px 10px;border-radius:999px}.dnow .d1{background:#e3f3f0;color:#0c5f58}.dnow .d2{background:#fde4e1;color:#b42318}.dnow .arr{padding:0;color:var(--s-muted)}
+.prog i{display:block;height:100%;background:var(--s-acc);border-radius:5px;transition:width .4s ease}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 22px 20px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.content.enter{animation:enter .28s ease}
+@keyframes enter{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.foot{flex:none;padding:10px 18px 22px;background:linear-gradient(to top,var(--s-bg) 70%,transparent)}
+.cta{all:unset;box-sizing:border-box;display:block;width:100%;text-align:center;cursor:pointer;background:var(--s-acc);color:#fff;font-weight:700;font-size:16px;padding:15px;border-radius:16px;transition:background .15s,opacity .15s,transform .1s}
+.cta:active{transform:scale(.98)}
+.cta[disabled]{opacity:.35;cursor:not-allowed}
+.cta.ghost{background:transparent;color:var(--s-acc);border:1.5px solid var(--s-acc)}
+.fbtns{display:flex;justify-content:center;align-items:center;gap:6px}.fbtns.two .cta{flex:1}
+.bk{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:3px;font-size:13.5px;font-weight:700;color:var(--s-muted);padding:10px 8px;border-radius:10px}
+.bk:hover{color:var(--s-fg);background:var(--s-card)}
+/* feedback */
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:30;overflow:hidden}
+.confetti i{position:absolute;top:58%;width:7px;height:12px;border-radius:2px;animation:conf 1.8s cubic-bezier(.15,.7,.4,1) forwards}
+@keyframes conf{0%{transform:translate(0,0) rotate(0);opacity:1}45%{transform:translate(calc(var(--dx)*.6),var(--dy)) rotate(calc(var(--r)*.5));opacity:1}100%{transform:translate(var(--dx),calc(var(--dy) + 560px)) rotate(var(--r));opacity:0}}
+.toast{position:absolute;left:50%;top:96px;transform:translate(-50%,-10px);background:#1a2421;color:#fff;font-size:13.5px;font-weight:700;padding:10px 16px;border-radius:999px;z-index:31;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:tin .35s cubic-bezier(.2,.9,.3,1.2) forwards}
+.toast.out{transition:opacity .4s,transform .4s;opacity:0;transform:translate(-50%,-14px)}
+@keyframes tin{from{opacity:0;transform:translate(-50%,-18px)}to{opacity:1;transform:translate(-50%,0)}}
+.op.on .mk{animation:mk .3s cubic-bezier(.2,.9,.3,1.6)}
+@keyframes mk{0%{transform:scale(.6)}100%{transform:scale(1)}}
+.op.just{animation:opj .35s ease}
+@keyframes opj{0%{transform:scale(1)}40%{transform:scale(.97)}100%{transform:scale(1)}}
+.scale button.on{animation:lkp .35s cubic-bezier(.2,.9,.3,1.6)}
+@keyframes lkp{0%{transform:scale(.8)}100%{transform:scale(1.06)}}
+.nb.on{animation:lkp .3s cubic-bezier(.2,.9,.3,1.6)}
+.cta.ready{animation:ready .6s ease}
+@keyframes ready{0%{box-shadow:0 0 0 0 rgba(15,118,110,.55)}100%{box-shadow:0 0 0 14px rgba(15,118,110,0)}}
+.tx.valid{border-color:#5fb3a5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%230f766e'/%3E%3Cpath d='M7 12.5l3.2 3.2L17 9' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:38px}
+.almost{display:inline-block;background:#fff4d6;color:#7a5200;font-weight:800;font-size:15px;padding:8px 14px;border-radius:12px;margin:2px 0 10px}
+.pinbox{background:#efe7de;border-radius:14px;padding:12px 10px;display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.pinm{align-self:flex-start;max-width:88%;background:#fff;border-radius:10px;border-top-left-radius:3px;padding:8px 11px;font-size:14.5px;line-height:1.45;box-shadow:0 1px .5px rgba(0,0,0,.13);color:#111b21}
+.donechip{display:inline-flex;align-items:center;gap:6px;background:#dcf8c6;color:#0b5e45;font-size:13px;font-weight:800;padding:6px 12px;border-radius:999px;margin-bottom:14px;animation:tin .4s cubic-bezier(.2,.9,.3,1.3)}
+.secnum{animation:bump .5s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes bump{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+.steps i{transition:background .6s}
+.jcaps{min-height:84px}
+.jcap{margin:0 0 6px!important;font-size:14.5px;font-weight:600;opacity:0;transform:translateY(6px);transition:opacity .6s,transform .6s}
+.jcap.in{opacity:1;transform:none}
+.jsum{opacity:0;transition:opacity .8s}.jsum.in{opacity:1}
+#past{transition:filter 1.6s ease,opacity 1.6s ease}
+#past.pastfade{filter:grayscale(1);opacity:.38}
+.replay{all:unset;cursor:pointer;font-size:13px;font-weight:700;color:var(--s-acc);padding:8px 12px;border-radius:999px;margin-top:6px}
+.replay:hover{background:var(--s-soft)}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:130px;height:5px;border-radius:5px;background:#1a2421;opacity:.85;z-index:9}
+
+.app h2{font-size:22px;line-height:1.25;margin:6px 0 10px;letter-spacing:-.01em}
+.app h3{font-size:18px;line-height:1.35;margin:4px 0 8px}
+.app p{margin:0 0 10px}
+.app .muted{color:var(--s-muted)}
+.small{font-size:13px}
+.qhint{font-size:13px;color:var(--s-muted);margin:-2px 0 12px}
+.pill{display:inline;background:var(--s-soft);color:var(--s-acc2);font-weight:700;padding:0 5px;border-radius:5px}
+.hl{background:#fde68a;color:#1b2420;padding:1px 4px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.opts{display:flex;flex-direction:column;gap:9px;margin:4px 0 10px}
+.op{all:unset;box-sizing:border-box;cursor:pointer;display:flex;gap:12px;align-items:center;width:100%;padding:14px 14px;border:1.5px solid var(--s-line);border-radius:14px;font-size:15px;font-weight:600;background:var(--s-bg);transition:border-color .15s,background .15s}
+.op:hover{border-color:#b9c6c2}
+.op:focus-visible{outline:2px solid var(--s-acc);outline-offset:2px}
+.op .mk{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid #b9c6c2;display:grid;place-items:center;transition:all .15s}
+.op .mk.sq{border-radius:6px}
+.op.on{border-color:var(--s-acc);background:var(--s-soft)}
+.op.on .mk{border-color:var(--s-acc);background:var(--s-acc)}
+.op.on .mk::after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+.op.on .mk.sq::after{width:10px;height:6px;border-radius:0;background:none;border-left:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(-45deg) translate(1px,-1px)}
+.op .lab{flex:1}
+.ohint{font-size:12.5px;font-weight:600;color:var(--s-muted);margin:-2px 0 8px}
+.opo{cursor:text;border-style:dashed}
+.opo.on{border-style:solid}
+.opo .ow{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.opo .ol{font-size:12px;font-weight:800;color:var(--s-acc)}
+.otx{all:unset;box-sizing:border-box;width:100%;font-size:15px;font-weight:600;color:var(--s-fg);padding:2px 0;border-bottom:1.5px solid var(--s-line)}
+.otx::placeholder{color:#93a29e;font-weight:500}
+.otx:focus{border-bottom-color:var(--s-acc)}
+.reveal{margin:-3px 0 0;padding:0 14px 14px 48px;border:1.5px solid var(--s-acc);border-top:0;border-radius:0 0 14px 14px;background:var(--s-soft)}
+.op.on.hasrev{border-radius:14px 14px 0 0;border-bottom:0}
+.tx{all:unset;box-sizing:border-box;width:100%;background:#fff;border:1.5px solid var(--s-line);border-radius:10px;padding:11px 12px;font:600 15px var(--font);color:var(--s-fg)}
+.tx:focus{border-color:var(--s-acc)}
+.tx.big{font-size:22px;font-weight:800;padding:14px}
+.lbl{display:block;font-size:12.5px;font-weight:700;color:var(--s-muted);margin:4px 0 6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.numgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:6px 0 12px}
+.nb{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;border:1.5px solid var(--s-line);border-radius:14px;padding:12px 4px;font-size:19px;font-weight:800}
+.nb small{display:block;font-size:11px;font-weight:600;color:var(--s-muted)}
+.nb.on{border-color:var(--s-acc);background:var(--s-acc);color:#fff}.nb.on small{color:#dff}
+/* likert */
+.lk{margin-top:6px}
+.lkcount{font-size:12px;font-weight:700;color:var(--s-muted);margin-bottom:6px}
+.lkdots{display:flex;gap:4px;margin-bottom:16px}.lkdots i{flex:1;height:4px;border-radius:4px;background:var(--s-line)}.lkdots i.d{background:var(--s-acc)}
+.lkitem{font-size:19px;font-weight:700;line-height:1.45;min-height:120px;margin-bottom:14px}
+.scale{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.scale button{all:unset;cursor:pointer;text-align:center;border:1.5px solid var(--s-line);border-radius:12px;padding:13px 0;font-size:17px;font-weight:800;transition:all .15s}
+.scale button:hover{border-color:#9fb1ac}
+.scale button.on{background:var(--s-acc);border-color:var(--s-acc);color:#fff;transform:scale(1.06)}
+.ends{display:flex;justify-content:space-between;font-size:12px;color:var(--s-muted);margin-top:6px;gap:12px}
+.ends span:last-child{text-align:right}
+.tapnote{text-align:center;font-size:12px;color:var(--s-muted);margin-top:16px}
+/* wheel */
+.wheel{position:relative;height:220px;margin:10px auto 6px;max-width:240px;user-select:none}
+.wheel .wl{height:100%;overflow-y:scroll;scroll-snap-type:y mandatory;scrollbar-width:none;cursor:grab;-webkit-mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(transparent,#000 30%,#000 70%,transparent)}
+.wheel .wl::-webkit-scrollbar{display:none}
+.wheel .wl.drag{cursor:grabbing;scroll-snap-type:none}
+.wheel .wi{height:44px;display:grid;place-items:center;scroll-snap-align:center;font-size:18px;font-weight:600;color:#9aa8a3;transition:color .1s,font-size .1s}
+.wheel .wi.sel{font-size:26px;font-weight:800;color:var(--s-fg)}
+.wheel .wpad{height:88px}
+.wheel .band{position:absolute;left:0;right:0;top:88px;height:44px;border-top:1.5px solid var(--s-acc);border-bottom:1.5px solid var(--s-acc);background:rgba(15,118,110,.06);border-radius:10px;pointer-events:none}
+.wheel .arr{position:absolute;right:-42px;all:unset;cursor:pointer;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--s-line);display:grid;place-items:center;font-weight:800;color:var(--s-muted)}
+.wbtns{display:flex;justify-content:center;gap:10px}
+.wbtns button{all:unset;cursor:pointer;padding:6px 14px;border-radius:999px;border:1.5px solid var(--s-line);font-weight:700;font-size:13px;color:var(--s-muted)}
+/* section intro */
+.secintro{display:flex;flex-direction:column;justify-content:center;min-height:100%;padding:20px 0}
+.secnum{width:58px;height:58px;border-radius:18px;background:var(--s-soft);color:var(--s-acc);display:grid;place-items:center;font-size:26px;font-weight:800;margin-bottom:16px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.meta span{font-size:12.5px;font-weight:700;background:var(--s-card);border:1px solid var(--s-line);padding:4px 10px;border-radius:999px;color:var(--s-muted)}
+.steps{display:flex;gap:6px;margin-top:18px}.steps i{flex:1;height:6px;border-radius:6px;background:var(--s-line)}.steps i.d{background:var(--s-acc)}.steps i.c{background:var(--s-acc);opacity:.45}
+/* cards */
+.card{border:1.5px solid var(--s-line);border-radius:14px;padding:12px 14px;margin:6px 0 12px;background:var(--s-card)}
+.sepia{background:#f3ebdd;border-color:#dccaa8;color:#3b3226}
+.sepia .k{font-size:11.5px;font-weight:800;color:#8a6f4a;text-transform:uppercase;letter-spacing:.04em}
+.sepia .v{font-size:17px;font-weight:800}
+.itemhead{font-size:12px;font-weight:800;color:var(--s-muted);margin-bottom:4px}
+/* fusion pictorial */
+.fus{position:relative;height:205px;margin:14px 0 6px;touch-action:none;user-select:none}
+.fus .grp{position:absolute;right:6px;top:28px;width:160px;height:160px;border-radius:50%;background:rgba(15,118,110,.12);border:2.5px solid var(--s-acc)}
+.fus .gl{position:absolute;left:-30px;right:-6px;top:-24px;text-align:center;font-weight:800;color:var(--s-acc2);font-size:13.5px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fus .me{position:absolute;top:68px;left:0;width:80px;height:80px;border-radius:50%;background:#e0672f;color:#fff;display:grid;place-items:center;font-weight:800;cursor:grab;box-shadow:0 6px 18px rgba(224,103,47,.35);touch-action:none;will-change:transform;z-index:2}
+.fus .me.snap{transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.fus .me:active{cursor:grabbing}
+.fus .track{position:absolute;left:40px;right:86px;top:196px;height:4px;border-radius:4px;background:var(--s-line)}
+.fus .tick{position:absolute;top:-4px;width:2px;height:12px;background:#b9c6c2}
+.fushint{text-align:center;font-size:13px;color:var(--s-muted)}
+.fushint b{color:var(--s-fg)}
+/* slider */
+.rng{-webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;cursor:pointer;margin:6px 0}
+.rng::-webkit-slider-runnable-track{height:10px;border-radius:10px;background:linear-gradient(to right,var(--s-acc) var(--p,0%),var(--s-line) var(--p,0%))}
+.rng::-moz-range-track{height:10px;border-radius:10px;background:var(--s-line)}
+.rng::-moz-range-progress{height:10px;border-radius:10px;background:var(--s-acc)}
+.rng::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:3px solid var(--s-acc);margin-top:-10px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.rng::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:3px solid var(--s-acc)}
+.rng.untouched::-webkit-slider-thumb{border-color:#9aa8a3}
+.rng:focus{outline:none}.rng:focus-visible{outline:2px solid var(--s-acc);outline-offset:4px;border-radius:10px}
+.bignum{text-align:center;font-size:40px;font-weight:800;line-height:1.1;margin-top:6px}
+.bigsub{text-align:center;font-size:14px;color:var(--s-muted);min-height:22px}
+.viz{margin:12px 0 4px;padding:12px;border-radius:14px;background:var(--s-card);border:1px solid var(--s-line)}
+.viz .vlab{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--s-muted);margin-top:8px}
+.bills{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.bill{height:30px;border-radius:5px;background:#cfe3d6;border:1.5px solid #9cc3aa;position:relative;transition:all .25s}
+.bill::after{content:"";position:absolute;inset:8px 30%;border-radius:50%;border:1.5px solid rgba(0,0,0,.12)}
+.bill.g{background:#0f766e;border-color:#0c5f58;transform:translateY(-4px)}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.day{border-radius:10px;padding:8px 0 6px;text-align:center;font-size:11px;font-weight:800;background:#fff;border:1.5px dashed #c8d2cf;color:#a6b1ad;transition:all .25s}
+.day .e{display:block;font-size:17px;line-height:1.2}
+.day.own{border-style:solid;border-color:#9fb1ac;color:var(--s-fg)}
+.day.g{background:var(--s-acc);border-color:var(--s-acc);color:#fff;transform:translateY(-3px)}
+.hours{display:flex;gap:3px}
+.hr{flex:1;height:40px;border-radius:6px;background:#2f3f63;position:relative;overflow:hidden;transition:all .25s}
+.hr i{position:absolute;inset:0;background:var(--s-acc);transform-origin:right;transform:scaleX(0);transition:transform .25s}
+.legend{display:flex;gap:14px;font-size:12px;font-weight:700;color:var(--s-muted);margin-top:8px;flex-wrap:wrap}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.checkline{display:flex;gap:10px;align-items:center;margin-top:10px;font-size:14px;font-weight:600;cursor:pointer}
+/* journey */
+.journey{margin:2px -8px 8px}
+.journey svg{display:block;width:100%;height:auto;max-height:350px;margin:0 auto}
+.mec.shake,.mefig.shake{animation:shk .5s ease-in-out 2}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+#tlpast,#tlnow,#tlk{transition:none}
+#jx.jxp{transform-box:fill-box;transform-origin:center;animation:jxp 1s ease-out 3}
+@keyframes jxp{0%{transform:scale(.8);opacity:1}100%{transform:scale(1.25);opacity:.4}}
+.hrt{font:800 12px var(--font);fill:#e0672f;animation:hrt 1.4s ease-out forwards}
+@keyframes hrt{0%{opacity:0;transform:translateY(0)}20%{opacity:.9}100%{opacity:0;transform:translateY(-26px)}}
+.wk line,.wk path,.wk circle{transition:none}
+.vsvg .vm{transform-box:view-box}
+.vsteps{display:flex;gap:6px;justify-content:space-between;margin:10px 0 4px}
+.vstep{all:unset;cursor:pointer;flex:1;height:44px;border-radius:12px;border:1.5px solid var(--line);background:#fff;text-align:center;font-weight:800;font-size:16px;color:var(--s-fg);transition:background .2s,color .2s,transform .15s,border-color .2s}
+.vstep:hover{border-color:var(--s-acc)}
+.vstep.demo{border-color:var(--s-acc);background:var(--s-soft)}
+.vstep.on{background:var(--s-acc);border-color:var(--s-acc);color:#fff;animation:lkp .25s ease-out}
+.vstep:focus-visible{outline:3px solid rgba(15,118,110,.35);outline-offset:2px}
+.j-road{stroke-dasharray:100;stroke-dashoffset:100;animation:draw 2.2s ease forwards .2s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pop{opacity:0;transform-box:fill-box;transform-origin:center bottom;animation:pop .5s cubic-bezier(.2,.9,.3,1.3) forwards}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.85)}to{opacity:1;transform:none}}
+.fade{opacity:0;animation:fadein .6s ease forwards}
+@keyframes fadein{to{opacity:1}}
+.drift{animation:drift 2.4s ease-in-out forwards}
+@keyframes drift{from{transform:translate(-36px,8px);opacity:1}to{transform:translate(0,0);opacity:.55}}
+.sum{font-size:15px;line-height:1.55;background:var(--s-card);border:1px solid var(--s-line);border-radius:14px;padding:12px 14px}
+.timer{font-size:12.5px;color:var(--s-muted);text-align:center;margin-top:8px}
+@media (prefers-reduced-motion:reduce){.content.enter{animation:none!important}}
+/* select */
+select.tx{appearance:auto}
+/* ===== chat ===== */
+.chat{position:absolute;inset:0;display:flex;flex-direction:column;background:#efe7de;z-index:4}
+.chat .ch{flex:none;background:#0b6e5f;color:#fff;padding:46px 10px 10px 8px;display:flex;align-items:center;gap:10px}
+.chat .ch .av{width:38px;height:38px;border-radius:50%;background:#d8e3e0;color:#355a52;display:grid;place-items:center;font-weight:800;font-size:16px}
+.chat .ch .nm{flex:1;min-width:0}
+.chat .ch .nm b{display:block;font-size:16px;line-height:1.2}
+.chat .ch .nm span{font-size:12.5px;opacity:.85}
+.chat .ch button{all:unset;cursor:pointer;width:36px;height:36px;border-radius:50%;display:grid;place-items:center}
+.chat .ch button:hover{background:rgba(255,255,255,.12)}
+.chat .wall{flex:1;overflow-y:auto;padding:12px 10px 8px;background-color:#efe7de;background-image:radial-gradient(rgba(120,100,80,.09) 1.2px,transparent 1.3px),radial-gradient(rgba(120,100,80,.06) 1px,transparent 1.1px);background-size:22px 22px,13px 13px;background-position:0 0,7px 9px;display:flex;flex-direction:column;gap:3px}
+.daytag{align-self:center;background:#fff;color:#5d6b66;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:8px;margin:4px 0 8px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.enc{align-self:center;background:#fdf4c5;color:#5b5232;font-size:11px;padding:6px 10px;border-radius:8px;text-align:center;max-width:86%;margin-bottom:8px}
+.m{max-width:80%;padding:6px 9px 6px 9px;border-radius:10px;font-size:14.5px;line-height:1.4;position:relative;box-shadow:0 1px .5px rgba(0,0,0,.13);word-wrap:break-word;animation:msgin .22s ease-out}
+@keyframes msgin{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+.m.in{align-self:flex-start;background:#fff;border-top-left-radius:3px}
+.m.out{align-self:flex-end;background:#d9fdd3;border-top-right-radius:3px}
+.m.cont.in{border-top-left-radius:10px}.m.cont.out{border-top-right-radius:10px}
+.m.first{margin-top:6px}
+.m .t{float:right;margin:6px 0 -4px 10px;font-size:11px;color:#667781;display:inline-flex;gap:3px;align-items:center}
+.m .tick{color:#8696a0;transition:color .3s}.m .tick.read{color:#34b7f1}
+.typing{align-self:flex-start;background:#fff;border-radius:10px;border-top-left-radius:3px;padding:10px 12px;display:flex;gap:4px;box-shadow:0 1px .5px rgba(0,0,0,.13);margin-top:6px;animation:msgin .2s ease-out}
+.typing i{width:7px;height:7px;border-radius:50%;background:#9aa6a3;animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.sysm{align-self:center;background:#e1f2fb;color:#3d5a6b;font-size:12px;font-weight:600;padding:6px 12px;border-radius:8px;margin:8px 0;animation:msgin .3s ease-out}
+.chat .qr{flex:none;padding:6px 8px 0;background:#efe7de;display:flex;flex-wrap:wrap;gap:5px;justify-content:center;transition:all .2s}
+.chat .qr::-webkit-scrollbar{display:none}
+.chat .qr button{padding:6px 12px!important;font-size:13.5px!important}
+.chat .qr .ql{flex:none;width:auto!important;align-self:center;padding:0 2px}
+.chat .qr .qo{background:#fff8e1;color:#7a5200;border:1.5px dashed #c9a227}
+.chat .ib .field.own{box-shadow:0 0 0 2px #c9a227;background:#fffdf5}
+.chat .ib .field.pulse{animation:fpulse 1s ease 2}
+@keyframes fpulse{50%{box-shadow:0 0 0 5px rgba(201,162,39,.35)}}
+.chat .qr:empty{padding:0}
+.chat .qr .ql{text-align:center;font-size:11.5px;font-weight:700;color:#6b6152}
+.chat .qr button{all:unset;cursor:pointer;background:#fff;color:#0b6e5f;font-weight:700;font-size:14px;padding:8px 14px;border-radius:18px;box-shadow:0 1px 1px rgba(0,0,0,.12);border:1.5px solid #fff;animation:msgin .25s ease-out}
+.chat .qr button:hover{border-color:#0b6e5f}
+.chat .ib{flex:none;display:flex;gap:6px;align-items:flex-end;padding:8px 8px 26px;background:#efe7de}
+.chat .ib .field{flex:1;display:flex;align-items:center;background:#fff;border-radius:24px;padding:4px 6px 4px 14px;min-height:44px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.chat .ib input{all:unset;flex:1;font-size:15px;color:#1a2421;min-width:0}
+.chat .ib input:disabled{color:#9aa6a3}
+.chat .ib input::placeholder{color:#8696a0}
+.chat .ib .send{all:unset;cursor:pointer;width:46px;height:46px;border-radius:50%;background:#0b6e5f;display:grid;place-items:center;flex:none;transition:opacity .15s}
+.chat .ib .send[disabled]{opacity:.45;cursor:default}
+.chat .done{flex:none;padding:10px 14px 26px;background:#efe7de}
+
+/* ===== researcher panel ===== */
+.panel{display:flex;flex-direction:column;gap:14px;min-width:0}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.box h4{margin:0 0 10px;font-size:13px;font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.seg button{all:unset;cursor:pointer;padding:7px 12px;border-radius:9px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.ctl{display:flex;flex-direction:column;gap:12px}
+.ctl .r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ctl .r>span{font-size:13px;font-weight:700;min-width:70px}
+.jump{display:flex;flex-wrap:wrap;gap:6px}
+.jump button,.rst{all:unset;cursor:pointer;font-size:13px;font-weight:600;padding:6px 11px;border-radius:9px;border:1px solid var(--line);color:var(--fg);background:var(--bg)}
+.jump button:hover,.rst:hover{border-color:var(--accent);color:var(--accent)}
+.pid{font:700 12px var(--mono);color:var(--accent)}
+.pnote{font-size:14px;color:var(--muted);margin:6px 0 0}
+.dt{width:100%;border-collapse:collapse;font-size:12.5px}
+.dt td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.dt td:first-child{font:600 11.5px var(--mono);color:var(--warn);white-space:nowrap;width:1%}
+.dt tr.sc td{background:var(--accent-soft)}
+.dwrap{max-height:340px;overflow:auto}
+.foottxt{font-size:13px;color:var(--muted);margin-top:20px}
+
+/* ===== versi website peserta ===== */
+html,body{height:100%}
+body{padding:0!important;background:#e9eeec;overflow:hidden}
+.app{height:100vh!important;height:100dvh!important;max-height:none!important;min-height:0!important;border-radius:0!important;max-width:560px;margin:0 auto;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+@media (min-width:600px){.app{box-shadow:0 0 0 1px #dfe5e3,0 10px 40px rgba(0,0,0,.08)}}
+.sbar,.homebar{display:none!important}
+.sendst{font-size:12.5px;color:var(--s-muted);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+        <div class="sbar"><span id="clock">09.41</span><span class="notch"></span><span class="ic"><svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1" fill="currentColor"/><rect x="5" y="5" width="3" height="7" rx="1" fill="currentColor"/><rect x="10" y="2.5" width="3" height="9.5" rx="1" fill="currentColor"/><rect x="15" y="0" width="3" height="12" rx="1" fill="currentColor"/></svg><svg width="26" height="12" viewBox="0 0 26 12"><rect x=".5" y=".5" width="22" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><rect x="23.5" y="4" width="2" height="4" rx="1" fill="currentColor" opacity=".5"/></svg></span></div>
+        <div class="abar" id="abar"><div class="row"><button class="back" id="back" aria-label="Kembali"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="sec" id="sectitle"></div><button class="back" id="sfxbtn" aria-label="Suara">🔇</button></div><div class="progrow"><div class="prog"><i id="progfill"></i></div><span id="progpct">0%</span></div></div>
+        <div class="content" id="content"></div>
+        <div class="foot" id="foot"></div>
+        <div class="homebar"></div>
+      </div>
+
+<script>
+/* ================= state ================= */
+const COND=(window.__INIT&&window.__INIT.cond)?{a:window.__INIT.cond.a,b:window.__INIT.cond.b}:{a:Math.random()<.5?'rd':'k',b:Math.random()<.5?'of':'ne'};
+const WEB_VERSION='20261118-1425';
+const newPid=()=>{try{return crypto.randomUUID();}catch(e){return 'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);}};
+const newCode=()=>('S3-'+Math.random().toString(36).slice(2,7)).toUpperCase();
+let R={_start:Date.now(),DEVICE:matchMedia('(pointer:coarse)').matches?'mobile':'desktop',PID:newPid(),CODE:newCode()}, cur='welcome', chatState=null, sumTimer=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+
+/* ================= piping ================= */
+const AFF=[['Nahdlatul Ulama (NU)','NU'],['Muhammadiyah','Muhammadiyah'],['Persis','Persis'],['LDII','LDII'],['Al-Irsyad','Al-Irsyad'],['Hidayatullah','Hidayatullah'],['Wahdah Islamiyah','Wahdah Islamiyah']];
+const shortAff=v=>{const f=AFF.find(a=>a[0]===v);return f?f[1]:v};
+const val=k=>R[k]==='__o'?(R[k+'_o']||'').trim():R[k];
+const G=()=>esc(shortAff(val('aff'))||'kelompok Anda');
+const GT=()=>esc(shortAff(val('faff'))||'kelompok teman');
+const TM=()=>esc((R.finit||'A.').trim());
+const hasF=()=>R.fb==='Ya, punya';
+const O6=['Tidak pernah','Sekali','2–3 kali','Sekitar sebulan sekali','Sekitar seminggu sekali','Beberapa kali seminggu'];
+const JUANG=['Merintis kegiatan dari awal','Menyiapkan acara besar sampai larut','Saling bantu saat ada musibah','Melewati masa sulit bersama'];
+const DULU=['Curhat soal masalah hidup','Minta saran soal sekolah atau kerja','Nongkrong habis kegiatan','Ngaji atau kajian rutin','Jadi panitia acara','Saling bantu saat susah'];
+const DSHORT={'Curhat soal masalah hidup':'curhat','Minta saran soal sekolah atau kerja':'minta saran','Nongkrong habis kegiatan':'nongkrong','Ngaji atau kajian rutin':'ngaji bareng','Jadi panitia acara':'jadi panitia','Saling bantu saat susah':'saling bantu'};
+const WHO=['Keluarga atau pasangan','Teman kerja atau sekolah','Tetangga','Teman dari komunitas lain','Sendiri'];
+const WSHORT={'Keluarga atau pasangan':'keluarga','Teman kerja atau sekolah':'teman kerja','Tetangga':'tetangga','Teman dari komunitas lain':'teman komunitas'};
+const DEST=['Tempat kerja','Sekolah atau kampus','Pasar','Rumah keluarga'];
+const PLACE=['Pasar','Halte atau terminal','Taman','Minimarket','Masjid atau musala di jalan'];
+const VEH=['Jalan kaki','Motor','Angkot atau ojek','Mobil'];
+const ST_OPTS=['Masih saya lakukan, bersama orang lain','Sudah saya ganti dengan kegiatan lain','Sudah berhenti saja'];
+const VIS_OPTS=['Hanya saya lewati','Saya singgahi untuk keperluan'];
+const items=()=>{const a=(R.aitems||[]).filter(x=>x!=='__o');if((R.aitems||[]).includes('__o')&&R.aitems_o)a.push('__o');return a;};
+const itemName=i=>{const it=items()[i];return it==='__o'?(R.aitems_o||'').trim():it};
+const itemShort=i=>{const it=items()[i];return it==='__o'?(R.aitems_o||'').trim().toLowerCase():DSHORT[it]};
+const place=i=>{const p=(R.aplaces||[]).filter(x=>x!=='__o');if((R.aplaces||[]).includes('__o')&&R.aplaces_o)p.push('__o');const x=p[i];return x==='__o'?(R.aplaces_o||'').trim():x};
+const nPlaces=()=>{const p=(R.aplaces||[]).filter(x=>x!=='__o').length;return p+((R.aplaces||[]).includes('__o')&&R.aplaces_o?1:0)};
+const whoShort=i=>{const w=R['awho'+i];if(!w)return'';if(w==='Sendiri')return'sendiri';if(w==='__o')return(R['awho'+i+'_o']||'').trim().toLowerCase();return WSHORT[w]};
+const fmtRp=n=>'Rp'+Math.round(n).toLocaleString('id-ID');
+const nowYear=2026;
+
+/* ================= item banks ================= */
+const SCRT=g=>[`Saat ini, sejauh mana hubungan Anda dengan orang-orang ${g} membuat Anda merasa bahwa masa lalu, masa kini, dan masa depan Anda saling terhubung?`,`Saat ini, sejauh mana hubungan Anda dengan orang-orang ${g} membuat jati diri Anda tetap sama dan tidak berubah?`,`Saat ini, sejauh mana hubungan Anda dengan orang-orang ${g} membuat Anda memandang hidup Anda sebagai sebuah kisah yang utuh?`,`Saat ini, sejauh mana hubungan Anda dengan orang-orang ${g} mengingatkan Anda pada masa lalu Anda?`];
+const SCRTT=g=>[`Sejauh mana hubungan Anda dengan orang-orang ${g} nanti akan membuat Anda merasa bahwa masa lalu, masa kini, dan masa depan Anda saling terhubung?`,`Sejauh mana hubungan Anda dengan orang-orang ${g} nanti akan membuat jati diri Anda tetap sama dan tidak berubah?`,`Sejauh mana hubungan Anda dengan orang-orang ${g} nanti akan membuat Anda memandang hidup Anda sebagai sebuah kisah yang utuh?`,`Sejauh mana hubungan Anda dengan orang-orang ${g} nanti akan mengingatkan Anda pada masa lalu Anda?`];
+const FUS=g=>[`${g} adalah saya.`,`Saya merasa satu dengan ${g}.`,`Saya merasa terlebur dalam ${g}.`,`Saya merasakan ikatan emosional yang mendalam dengan sesama orang-orang ${g}.`,`Saya kuat karena ${g}.`,`Saya akan melakukan apapun untuk ${g} lebih dari yang dilakukan oleh orang-orang ${g} lainnya.`,`Saya membuat ${g} kuat.`];
+const FND=g=>[`Saya akan melawan seseorang yang secara fisik mengancam orang-orang ${g}.`,`Saya akan melawan seseorang yang menghina orang-orang ${g} secara keseluruhan.`,`Saya akan membantu orang-orang ${g} lainnya untuk membalas dendam pada seseorang yang menghina ${g}.`,`Menyakiti orang lain bisa diterima jika itu untuk melindungi ${g}.`,`Saya akan melakukan apapun untuk melindungi ${g}.`];
+const GID=['Saya sering merasa bahwa saya bagian dari kelompok ini.','Menjadi bagian dari kelompok ini tidak terlalu memengaruhi cara saya melihat diri saya.','Menjadi bagian dari kelompok ini adalah hal yang penting bagi diri saya.','Saya jarang memikirkan bahwa saya bagian dari kelompok ini.'];
+
+/* ================= pages ================= */
+const SECS=[['s1','Tentang Anda'],['s2','Cerita Anda'],['s3','Anda dan kelompok Anda'],['s4','Pesan dari teman'],['s5','Penutup']];
+function flow(){
+  const f=['welcome'];
+  if(R.consent==='Tidak') return ['welcome','declined'];
+  f.push('s1','aff','fb');
+  if(R.fb==='Tidak punya'){ f.push('noelig'); return f; }
+  f.push('fb1','fb2','fbc','fbatt','fbsim','fbprior','fbknow','y0','role','act','freq');
+  f.push('s2','a_intro','a_juang');
+  if(COND.a==='rd'){
+    f.push('a_now','a_items','a_conf');
+    items().forEach((_,i)=>{f.push('a_st'+i); if(R['ast'+i]!=='Sudah berhenti saja') f.push('a_who'+i);});
+  } else {
+    f.push('a_dest','a_places');
+    for(let i=0;i<nPlaces();i++) f.push('a_vis'+i,'a_veh'+i);
+  }
+  f.push('a_year','a_sum');
+  f.push('s3');
+  for(let i=1;i<=4;i++) f.push('scrt'+i);
+  f.push('mca1','mca2','mca3');
+  f.push('fuspic');
+  for(let i=1;i<=7;i++) f.push('fus'+i);
+  f.push('sac_i','sac_m1'); if(R.inc_none!==true) f.push('sac_m2');
+  f.push('sac_f1'); if(R.fam&&R.fam!=='0') f.push('sac_f2');
+  for(let i=1;i<=5;i++) f.push('fnd'+i);
+  f.push('attA');
+  if(hasF()){
+    f.push('s4','chat_i','chat','refb');
+    for(let i=1;i<=4;i++) f.push('scrtt'+i);
+    f.push('mcb1','mcb2','mcb3');
+    for(let i=1;i<=7;i++) f.push('fust'+i);
+    f.push('fuspict','int1','int2','attB');
+  }
+  f.push('s5','sw1','swch');
+  f.push('ease','fita'); if(hasF()) f.push('belb');
+  f.push('sw2','useme','demo1','demo2','debrief','end');
+  return f;
+}
+const secOf=id=>{
+  const f=flow(); const i=f.indexOf(id); let s=null;
+  for(let k=0;k<=i;k++){ if(/^s[1-5]$/.test(f[k])) s=f[k]; }
+  return s;
+};
+
+/* ---------- components ---------- */
+function opts(key,list,{multi=0,other=false,otherPh='Tulis di sini…',reveal=null,autoNext=false}={}){
+  const v=R[key]; let h=(other?`<div class="ohint">${multi?'Pilih yang sesuai':'Pilih salah satu'}, atau tulis jawaban Anda sendiri di kotak paling bawah.</div>`:'')+'<div class="opts">';
+  list.forEach(o=>{
+    const on=multi?(v||[]).includes(o):v===o;
+    const rv=reveal&&reveal.label===o;
+    h+=`<button class="op ${on?'on':''} ${rv&&on?'hasrev':''}" data-pick="${key}" data-v="${esc(o)}" data-multi="${multi}" ${autoNext?'data-auto="1"':''}><span class="mk ${multi?'sq':''}"></span><span class="lab">${o}</span></button>`;
+    if(rv&&on) h+=`<div class="reveal"><label class="lbl" for="rv_${key}">${reveal.q}</label><input class="tx" id="rv_${key}" data-text="${reveal.key}" value="${esc(R[reveal.key]||'')}" placeholder="${reveal.ph}" maxlength="40" autocomplete="off"></div>`;
+  });
+  if(other){
+    const on=multi?(v||[]).includes('__o'):v==='__o';
+    h+=`<label class="op opo ${on?'on':''}"><span class="mk ${multi?'sq':''}"></span><span class="ow"><span class="ol">✏️ Jawaban lain</span><input class="otx" data-otext="${key}" data-multi="${multi}" value="${esc(R[key+'_o']||'')}" placeholder="Ketik jawaban Anda sendiri di sini" maxlength="40" autocomplete="off" aria-label="Tulis jawaban Anda sendiri"></span></label>`;
+  }
+  return h+'</div>';
+}
+const okOpt=(k,{multi=false,reveal=null}={})=>{
+  const v=R[k]; if(multi){ if(!v||!v.length) return false; if(v.includes('__o')&&!(R[k+'_o']||'').trim()) return false; return true; }
+  if(!v) return false; if(v==='__o'&&!(R[k+'_o']||'').trim()) return false; if(reveal&&v===reveal.label&&!(R[reveal.key]||'').trim()) return false; return true;
+};
+function wheel(key,from,to,def){
+  if(R[key]==null) R[key]=def;
+  let h=`<div class="wheel" data-wheel="${key}"><div class="wl" tabindex="0" aria-label="Pilih tahun"><div class="wpad"></div>`;
+  for(let y=to;y>=from;y--) h+=`<div class="wi" data-y="${y}">${y}</div>`;
+  return h+`<div class="wpad"></div></div><div class="band"></div></div><div class="wbtns"><button data-wstep="${key}" data-d="1" aria-label="Tahun lebih baru">▲ Lebih baru</button><button data-wstep="${key}" data-d="-1" aria-label="Tahun lebih lama">▼ Lebih lama</button></div>`;
+}
+function likertPage(key,lead,item,i,n,lo,hi){
+  return {body:`<div class="lk"><div class="lkcount">Pernyataan ${i} dari ${n}</div><div class="lkdots">${Array.from({length:n},(_,k)=>`<i class="${k<i?'d':''}"></i>`).join('')}</div><p class="qhint">${lead}</p><div class="lkitem">${item}</div><div class="scale">${[1,2,3,4,5,6,7].map(x=>`<button data-lk="${key}" data-v="${x}" class="${R[key]==x?'on':''}" aria-label="${x}">${x}</button>`).join('')}</div><div class="ends"><span>1 = ${lo}</span><span>7 = ${hi}</span></div><p class="tapnote">Ketuk satu angka. Pernyataan berikutnya muncul sendiri.</p></div>`, ok:()=>R[key]!=null, btn:null};
+}
+function fusPic(key,gname){
+  return {body:`<h3>Geser lingkaran oranye "Saya" sampai gambarnya paling cocok dengan hubungan Anda dan ${gname} saat ini.</h3><div class="fus" data-fus="${key}"><div class="track">${[0,1,2,3,4].map(k=>`<span class="tick" style="left:${k*25}%"></span>`).join('')}</div><div class="grp"><span class="gl">${gname}</span></div><div class="me" tabindex="0" role="slider" aria-valuemin="1" aria-valuemax="5" aria-label="Posisi lingkaran Saya">Saya</div></div><p class="fushint" id="fushint">${R[key]?fusLabel(R[key]):'Tekan dan geser lingkaran <b>Saya</b>.'}</p>`, ok:()=>R[key]!=null};
+}
+const fusLabel=v=>'Posisi tersimpan. Geser lagi kalau ingin mengubah.';
+const SEC_MIN={s1:2,s2:4,s3:4,s4:3,s5:2};
+function secLeft(id){const f=flow();return Object.keys(SEC_MIN).filter(k=>f.includes(k)&&f.indexOf(k)>=f.indexOf(id)).reduce((a,k)=>a+SEC_MIN[k],0);}
+function mcbPage(i,item){const gt=shortAff(val('faff'));return likertPage('MCB_END'+i,`<span style="display:block;background:#fff4d6;color:#5c3d00;font-weight:800;font-size:14px;padding:8px 12px;border-radius:10px">Bayangkan Anda bergabung dengan ${gt}.</span>Seberapa setuju Anda dengan pernyataan ini?`,item,i,3,'Sangat tidak setuju','Sangat setuju');}
+function secIntro(n,title,desc,id){
+  const mins=SEC_MIN[id], left=secLeft(id), last=id==='s5';
+  return {body:`<div class="secintro">${n>1&&n!==3?`<div><span class="donechip">✓ Bagian ${n-1} selesai</span></div>`:''}<div class="secnum">${n}</div><div class="small muted" style="font-weight:700">Bagian ${n} dari ${hasF()?5:4}</div><h2>${title}</h2><p>${desc}</p>${last?`<div class="almost">🏁 Tinggal ± ${mins} menit lagi</div>`:''}<div class="meta">${last?'':`<span>± ${mins} menit</span>`}${!last&&id!=='s1'?`<span>Sisa ± ${left} menit</span>`:''}<span>Tidak ada jawaban benar atau salah</span></div><div class="steps">${SECS.filter(s=>s[0]!=='s4'||hasF()).map((s,k)=>`<i class="${k<n-1?'d':k===n-1?'c':''}"></i>`).join('')}</div></div>`,ok:()=>true,btn:'Mulai'};
+}
+function sliderGive(key,max,step,ownTxt){
+  if(R[key]==null) R[key]=0;
+  return `<input type="range" class="rng ${R[key+'_t']?'':'untouched'}" data-rng="${key}" min="0" max="${max}" step="${step}" value="${R[key]}" aria-label="Geser jumlah yang mau Anda berikan" style="--p:${R[key]/max*100}%"><div class="ends"><span>Tidak ada</span><span>${ownTxt}</span></div>`;
+}
+
+
+/* ---------- visual SCRT (1–7): group members link past, present, future self ---------- */
+const VIS_SELF=[{x:44,lab:'Saya dulu',c:'#f1a77c'},{x:160,lab:'Saya sekarang',c:'#e0672f'},{x:276,lab:'Saya nanti',c:'#c0501d'}];
+const VIS_IN=[86,118,202,234], VIS_OUT=[[214,62],[238,58],[262,62],[286,58]];
+const VIS_TXT=['Tidak menyambungkan sama sekali','Hampir tidak menyambungkan','Sedikit menyambungkan','Cukup menyambungkan','Banyak menyambungkan','Sangat menyambungkan','Menyambungkan sepenuhnya'];
+function visFig(col,s=1){return `<line x1="-2.2" y1="-16" x2="-3" y2="0" stroke="${col}" stroke-width="3.6" stroke-linecap="round"/><line x1="2.2" y1="-16" x2="3" y2="0" stroke="${col}" stroke-width="3.6" stroke-linecap="round"/><path d="M-7.5 -14 Q-8 -32 0 -32 Q8 -32 7.5 -14 Z" fill="${col}"/><circle cy="-39" r="6.5" fill="${col}"/>`;}
+function visSVG(gname){
+  let s=`<svg viewBox="0 0 320 214" width="100%" class="vsvg" aria-hidden="true">`;
+  s+=`<rect id="vband" x="14" y="104" width="292" height="62" rx="31" fill="#0f766e" opacity="0"/>`;
+  s+=`<g transform="translate(14,16)"><g transform="translate(6,22) scale(.42)">${visFig('#0f766e')}</g><text x="16" y="17" style="font:700 10.5px var(--font);fill:#1d5a4b">= orang-orang ${esc(gname)}</text></g>`;
+  s+=`<g id="vlinks">${[0,1,2,3,4,5].map(i=>`<line class="vl" data-i="${i}" stroke="#0f766e" stroke-width="3" stroke-linecap="round" opacity="0"/>`).join('')}</g>`;
+  s+=`<g id="vgap">${[0,1].map(j=>`<text class="vq" x="${(VIS_SELF[j].x+VIS_SELF[j+1].x)/2}" y="140" text-anchor="middle" style="font:800 15px var(--font);fill:#b9c3c0">· · ·</text>`).join('')}</g>`;
+  VIS_SELF.forEach(p=>{s+=`<g transform="translate(${p.x},158)">${visFig(p.c)}</g><text x="${p.x}" y="182" text-anchor="middle" style="font:800 11px var(--font);fill:#1a2421">${p.lab}</text>`;});
+  s+=`<path d="M30 198 H290" stroke="#b9c3c0" stroke-width="1.5" marker-end="url(#varr)"/><defs><marker id="varr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#b9c3c0"/></marker></defs><text x="160" y="211" text-anchor="middle" style="font:600 9px var(--font);fill:#7b8783">waktu</text>`;
+  VIS_IN.forEach((x,i)=>{s+=`<g class="vm" data-i="${i}" style="transition:transform .65s cubic-bezier(.3,.9,.3,1.1),opacity .65s">${visFig('#0f766e')}</g>`;});
+  return s+'</svg>';
+}
+function visApply(L,muted){
+  const svg=$('.vsvg'); if(!svg) return;
+  const k=(L-1)/6, p=[0,1,2,3].map(i=>Math.max(0,Math.min(1,(k*4-i*.85))));
+  svg.querySelectorAll('.vm').forEach((g,i)=>{const [ox,oy]=VIS_OUT[i],ix=VIS_IN[i],iy=158;const x=ox+(ix-ox)*p[i],y=oy+(iy-oy)*p[i],sc=.62+.38*p[i];g.style.transform=`translate(${x}px,${y}px) scale(${sc})`;g.style.opacity=muted?.35:(.4+.6*p[i]);});
+  // chain: self0-m0, m0-m1, m1-self1, self1-m2, m2-m3, m3-self2
+  const nodes=[[VIS_SELF[0].x,1],[VIS_IN[0],p[0]],[VIS_IN[1],p[1]],[VIS_SELF[1].x,1],[VIS_IN[2],p[2]],[VIS_IN[3],p[3]],[VIS_SELF[2].x,1]];
+  const hy=158-20;
+  svg.querySelectorAll('.vl').forEach((l,i)=>{const a=nodes[i],b=nodes[i+1];const on=a[1]>=.95&&b[1]>=.95;l.setAttribute('x1',a[0]+7);l.setAttribute('x2',b[0]-7);l.setAttribute('y1',hy);l.setAttribute('y2',hy);l.style.transition='opacity .4s .35s';l.setAttribute('opacity',on&&!muted?1:0);});
+  const g0=p[0]>=.95&&p[1]>=.95,g1=p[2]>=.95&&p[3]>=.95;
+  svg.querySelectorAll('.vq').forEach((e,j)=>{e.style.transition='opacity .4s';e.setAttribute('opacity',(j?g1:g0)&&!muted?0:1);});
+  const b=svg.querySelector('#vband');b.style.transition='opacity .6s';b.setAttribute('opacity',muted?0:L===7?.13:L>=6?.07:0);
+}
+let visDemo=null;
+function visPage(key,gname,fut){
+  const v=R[key+'_t']?R[key]:null;
+  return {body:`<div class="itemhead">Satu pertanyaan bergambar</div><h3>${fut?`Bayangkan Anda bergabung dengan ${gname}. `:''}Seberapa besar peran orang-orang <span class="pill">${gname}</span> ${fut?'nanti ':''}dalam menyambungkan diri Anda yang dulu, sekarang, dan nanti?</h3>
+  <p class="qhint">Dalam gambar, orang-orang ${gname} bisa bergandengan tangan menjadi penghubung antara diri Anda dulu, sekarang, dan nanti. <b>Makin besar angkanya, makin tersambung.</b></p>
+  <div class="viz" id="viz" style="background:#fff;padding:6px 4px 2px">${visSVG(gname)}</div>
+  <div class="bigsub" id="bs" style="font-weight:800;color:var(--s-fg);min-height:42px;text-align:center;display:flex;align-items:center;justify-content:center">${v?VIS_TXT[v-1]:'<span class="muted" style="font-weight:600">Lihat contohnya, lalu pilih angka</span>'}</div>
+  <div class="vsteps" role="radiogroup" aria-label="Seberapa menyambungkan">${[1,2,3,4,5,6,7].map(n=>`<button type="button" class="vstep${v===n?' on':''}" data-vk="${key}" data-v="${n}" role="radio" aria-checked="${v===n}">${n}</button>`).join('')}</div>
+  <div class="ends"><span>Tidak menyambungkan</span><span>Menyambungkan sepenuhnya</span></div>`,ok:()=>!!R[key+'_t']};
+}
+function visBind(){
+  const btns=[...document.querySelectorAll('.vstep')]; if(!btns.length) return;
+  const key=btns[0].dataset.vk;
+  clearInterval(visDemo);visDemo=null;
+  if(R[key+'_t']) visApply(R[key]);
+  else { visApply(1,true); const seq=[1,3,5,7,4]; let i=0; const bs=$('#bs');
+    setTimeout(()=>{ if(R[key+'_t']) return; visDemo=setInterval(()=>{ if(R[key+'_t']||!$('.vsvg')){clearInterval(visDemo);visDemo=null;return;} const L=seq[i++]; if(i>seq.length){clearInterval(visDemo);visDemo=null;visApply(4,true);if(bs)bs.innerHTML='<span class="muted" style="font-weight:600">Sekarang pilih angka yang paling sesuai</span>';btns.forEach(b=>b.classList.remove('demo'));return;} visApply(L,false); btns.forEach(b=>b.classList.toggle('demo',+b.dataset.v===L)); if(bs) bs.innerHTML=`<span class="muted" style="font-weight:700">Contoh ${L}: ${VIS_TXT[L-1].toLowerCase()}</span>`; },1100); },500); }
+  btns.forEach(b=>b.onclick=()=>{clearInterval(visDemo);visDemo=null;btns.forEach(x=>{x.classList.remove('on','demo');x.setAttribute('aria-checked','false');});b.classList.add('on');b.setAttribute('aria-checked','true');
+    const L=+b.dataset.v;R[key]=L;R[key+'_t']=true;visApply(L);$('#bs').textContent=VIS_TXT[L-1];SFX.select();haptic(6);updBtn();renderData();});
+}
+/* ---------- page definitions ---------- */
+function page(id){
+  const g=G(), gt=GT(), tm=TM();
+  let m;
+  if(id==='role') return {body:`<h3>Apa posisi Anda di <span class="pill">${g}</span>?</h3>${opts('ROLE',['Pengurus atau pengelola','Anggota aktif','Anggota biasa','Simpatisan'],{autoNext:true})}`,ok:()=>!!R.ROLE};
+  if(id==='fbc') return likertPage('CLOSE_T',`Tentang <span class="pill">${tm}</span>.`,`Seberapa dekat Anda dengan ${tm}?`,1,1,'Tidak dekat sama sekali','Sangat dekat');
+  if(id==='fbatt') return likertPage('ATT_GT','Penilaian umum Anda.',`Bagaimana perasaan Anda terhadap ${gt} secara umum?`,1,1,'Sangat negatif','Sangat positif');
+  if(id==='fbsim') return likertPage('SIM_GT','Penilaian umum Anda.',`Menurut Anda, seberapa dekat ${gt} dengan ${g} dalam ajaran dan kebiasaannya?`,1,1,'Sangat jauh','Sangat dekat');
+  if(id==='fbknow') return {body:`<h3>Selain ${tm}, kira-kira berapa orang di <span class="pill">${gt}</span> yang Anda kenal secara pribadi?</h3><p class="qhint">Kenal secara pribadi, bukan sekadar tahu nama atau wajahnya.</p>${opts('KNOW_GT',['Tidak ada','1–2 orang','3–5 orang','6–10 orang','11–25 orang','Lebih dari 25 orang'],{autoNext:true})}`,ok:()=>!!R.KNOW_GT};
+  if(id==='fbprior') return {body:`<h3>Apakah Anda pernah ikut kegiatan <span class="pill">${gt}</span>?</h3>${opts('PRIOR_GT',['Belum pernah','Pernah, sekali atau dua kali','Pernah, beberapa kali','Sering'],{autoNext:true})}`,ok:()=>!!R.PRIOR_GT};
+  if(id==='fita') return likertPage('FIT_A','Tentang gambar perjalanan di bagian "Cerita Anda".','Seberapa sesuai gambar perjalanan tadi dengan pengalaman Anda yang sebenarnya?',1,1,'Sama sekali tidak sesuai','Sangat sesuai');
+  if(id==='belb') return likertPage('REAL_B','Tentang chat tadi.',`Seberapa mudah Anda membayangkan chat tadi benar-benar dikirim oleh ${tm}?`,1,1,'Sangat sulit','Sangat mudah');
+  if(id==='useme') return {body:`<h3>Apakah jawaban Anda sebaiknya kami pakai dalam analisis?</h3><p class="qhint">Jawab dengan jujur. Pilihan apa pun tidak berpengaruh apa-apa bagi Anda.</p>${opts('USE_ME',['Ya, saya mengisi dengan serius','Tidak, saya kurang serius atau asal mengisi'],{autoNext:true})}`,ok:()=>!!R.USE_ME};
+  if(id==='scrtv') return visPage('SCRT_VIS',g,false);
+  if(id==='scrtvt') return visPage('SCRT_VIS_T',gt,true);
+  if((m=id.match(/^scrt(\d)$/))) return likertPage('SCRT'+m[1],'Jawab sesuai yang Anda rasakan saat ini.',SCRT(`<span class="pill">${g}</span>`)[m[1]-1],+m[1],4,'Tidak sama sekali','Sangat kuat');
+  if((m=id.match(/^scrtt(\d)$/))) return likertPage('SCRT_T'+m[1],`<span style="display:block;background:#fff4d6;color:#5c3d00;font-weight:800;font-size:14px;padding:8px 12px;border-radius:10px">Bayangkan Anda bergabung dengan ${gt}.</span>`,SCRTT(`<span class="pill">${gt}</span>`)[m[1]-1],+m[1],4,'Tidak sama sekali','Sangat kuat');
+  if((m=id.match(/^fus(\d)$/))) return likertPage('FUS'+m[1],'Seberapa setuju Anda dengan pernyataan ini?',FUS(`<span class="pill">${g}</span>`)[m[1]-1],+m[1],7,'Sangat tidak setuju','Sangat setuju');
+  if((m=id.match(/^fust(\d)$/))) return likertPage('FUS_T'+m[1],`Bayangkan Anda bergabung dengan ${gt}. Seberapa setuju Anda?`,FUS(`<span class="pill">${gt}</span>`)[m[1]-1],+m[1],7,'Sangat tidak setuju','Sangat setuju');
+  if((m=id.match(/^fnd(\d)$/))) return likertPage('FnD'+m[1],'Seberapa setuju Anda dengan pernyataan ini?',FND(`<span class="pill">${g}</span>`)[m[1]-1],+m[1],5,'Sangat tidak setuju','Sangat setuju');
+  if((m=id.match(/^gid(\d)$/))) return likertPage('GID_C'+m[1],`Pernyataan berikut tentang ${g}.`,GID[m[1]-1].replace('kelompok ini',`kelompok ini (<span class="pill">${g}</span>)`),+m[1],4,'Sangat tidak setuju','Sangat setuju');
+  if((m=id.match(/^a_st(\d)$/))){const i=+m[1],k='ast'+i,rv={label:ST_OPTS[1],key:'arep'+i,q:'Diganti dengan kegiatan apa?',ph:'Misalnya: olahraga pagi'};
+    return {body:`<div class="itemhead">Hal ${i+1} dari ${items().length}</div><div class="card sepia"><div class="k">Dulu, bersama orang-orang ${g}</div><div class="v">${esc(itemName(i))}</div></div><h3>Sekarang, hal ini masih Anda lakukan, sudah Anda ganti, atau sudah berhenti?</h3>${opts(k,ST_OPTS,{reveal:rv})}`,ok:()=>okOpt(k,{reveal:rv})};}
+  if((m=id.match(/^a_who(\d)$/))){const i=+m[1],k='awho'+i,rep=R['ast'+i]===ST_OPTS[1];
+    return {body:`<div class="itemhead">Hal ${i+1} dari ${items().length}</div><div class="card" style="background:var(--s-soft);border-color:#9fd3c9"><div class="small" style="font-weight:800;color:var(--s-acc2)">SEKARANG</div><div style="font-size:17px;font-weight:800">${esc(rep?(R['arep'+i]||''):itemName(i))}</div></div><h3>Sekarang, Anda melakukannya bersama siapa?</h3>${opts(k,WHO,{other:true,otherPh:'Misalnya: teman kos'})}`,ok:()=>okOpt(k)};}
+  if((m=id.match(/^a_vis(\d)$/))){const i=+m[1],k='avis'+i,rv={label:VIS_OPTS[1],key:'apur'+i,q:'Keperluannya apa?',ph:'Misalnya: beli sayur'};
+    return {body:`<div class="itemhead">Tempat ${i+1} dari ${nPlaces()}</div><div class="card"><div class="small muted" style="font-weight:800">DI PERJALANAN KE ${esc((val('adest')||'').toUpperCase())}</div><div style="font-size:17px;font-weight:800">${esc(place(i))}</div></div><h3>Biasanya, tempat ini hanya Anda lewati, atau Anda singgahi?</h3>${opts(k,VIS_OPTS,{reveal:rv})}`,ok:()=>okOpt(k,{reveal:rv})};}
+  if((m=id.match(/^a_veh(\d)$/))){const i=+m[1],k='aveh'+i;
+    return {body:`<div class="itemhead">Tempat ${i+1} dari ${nPlaces()}</div><div class="card"><div style="font-size:17px;font-weight:800">${esc(place(i))}</div></div><h3>Saat melewati tempat ini, biasanya Anda naik apa?</h3>${opts(k,VEH,{other:true,otherPh:'Misalnya: sepeda'})}`,ok:()=>okOpt(k)};}
+  const P={
+    get welcome(){return {noBack:true,body:`<div style="padding-top:8px"><div class="secnum" style="background:#fdf1e7;color:#c2591f">👋</div><h2>Assalamualaikum, selamat datang</h2><p>Survei ini tentang pengalaman Anda bersama kelompok keagamaan yang Anda ikuti. Waktunya sekitar <b>15 menit</b>.</p><div class="card"><div style="font-weight:800;margin-bottom:4px">Siapa yang boleh ikut?</div><div class="small">• WNI, beragama Islam, usia 18 tahun ke atas<br>• Berafiliasi dengan sebuah kelompok keagamaan minimal 2 tahun<br>• Punya teman dekat yang berafiliasi dengan kelompok keagamaan lain</div></div><div class="card"><div style="font-weight:800;margin-bottom:4px">Yang perlu Anda tahu</div><div class="small">• Jawaban Anda dirahasiakan dan dianalisis secara berkelompok.<br>• Anda boleh berhenti kapan saja tanpa konsekuensi.<br>• Di akhir survei ada penjelasan lengkap tentang penelitian ini.</div></div><h3 style="font-size:16px">Apakah Anda bersedia ikut?</h3>${opts('consent',['Ya, saya bersedia ikut','Tidak'])}</div>`,ok:()=>!!R.consent}},
+    get noelig(){return {noBack:false,body:`<div class="secintro"><h2>Terima kasih</h2><p>Survei ini khusus untuk peserta yang punya teman dekat di kelompok keagamaan lain, jadi Anda belum bisa melanjutkan.</p><p>Terima kasih sudah meluangkan waktu. Anda boleh menutup halaman ini.</p></div>`,ok:()=>false,btn:null}},
+    get declined(){return {noBack:false,body:`<div class="secintro"><h2>Terima kasih</h2><p>Terima kasih sudah membuka survei ini. Anda boleh menutup halaman ini.</p></div>`,ok:()=>false,btn:null}},
+    get s1(){return secIntro(1,'Tentang Anda','Beberapa pertanyaan singkat tentang kelompok keagamaan Anda dan teman-teman Anda.','s1')},
+    get aff(){return {body:`<h3>Anda berafiliasi dengan kelompok keagamaan apa?</h3><p class="qhint">Pilih yang paling sesuai. Nama ini akan kami pakai di pertanyaan berikutnya.</p>${opts('aff',AFF.map(a=>a[0]),{other:true,otherPh:'Tulis nama kelompoknya'})}`,ok:()=>okOpt('aff')}},
+    get y0(){return {body:`<h3>Sejak tahun berapa Anda berafiliasi dengan <span class="pill">${g}</span>?</h3><p class="qhint">Geser roda ke atas atau ke bawah. Perkiraan terdekat sudah cukup.</p>${wheel('Y0',1960,nowYear,2015)}`,ok:()=>R.Y0!=null}},
+    get act(){return {body:`<h3>Dalam 3 bulan terakhir, seberapa sering Anda ikut kegiatan <span class="pill">${g}</span>?</h3><p class="qhint">Misalnya pengajian, rapat, atau kegiatan sosial.</p>${opts('Act',O6,{autoNext:true})}`,ok:()=>!!R.Act}},
+    get freq(){return {body:`<h3>Dalam 3 bulan terakhir, seberapa sering Anda bertemu atau berkomunikasi dengan sesama anggota <span class="pill">${g}</span>?</h3><p class="qhint">Termasuk di luar kegiatan resmi, misalnya ngobrol atau chat.</p>${opts('Freq',O6,{autoNext:true})}`,ok:()=>!!R.Freq}},
+    get fb(){return {body:`<h3>Apakah Anda punya teman dekat yang berafiliasi dengan kelompok keagamaan <u>lain</u>, bukan <span class="pill">${g}</span>?</h3><p class="qhint">Misalnya teman yang ikut kelompok lain dan sampai sekarang masih berhubungan dengan Anda.</p>${opts('fb',['Ya, punya','Tidak punya'],{autoNext:true})}`,ok:()=>!!R.fb}},
+    get fb1(){return {body:`<h3>Ceritakan sedikit tentang teman itu</h3><label class="lbl" for="finit">Inisialnya (maksimal 5 huruf)</label><input class="tx big" id="finit" data-text="finit" value="${esc(R.finit||'')}" placeholder="Misalnya: R." maxlength="5" autocomplete="off" style="max-width:180px;text-transform:uppercase"><label class="lbl" style="margin-top:14px">Dia berafiliasi dengan kelompok apa?</label>${opts('faff',AFF.map(a=>a[0]).filter(a=>a!==R.aff),{other:true,otherPh:'Tulis nama kelompoknya'})}`,ok:()=>(R.finit||'').trim().length>0&&okOpt('faff')&&shortAff(val('faff'))!==shortAff(val('aff'))}},
+    get fb2(){return {body:`<h3>Sejak tahun berapa Anda kenal <span class="pill">${tm}</span>?</h3>${wheel('YRS_T',1960,nowYear,2018)}<h3 style="margin-top:16px">Dalam 3 bulan terakhir, seberapa sering Anda bertemu atau chat dengan <span class="pill">${tm}</span>?</h3>${opts('FREQ_T',O6)}`,ok:()=>R.YRS_T!=null&&!!R.FREQ_T}},
+    get s2(){return secIntro(2,`Cerita Anda bersama ${g}`,`Sekarang kami ingin mendengar cerita Anda. Di bagian ini Anda cukup memilih jawaban, sesekali menulis satu-dua kata.`,'s2')},
+    get a_intro(){return {body:`<h2>Perjalanan bersama ${g}</h2><p>Banyak orang punya masa-masa <b>berjuang bersama</b> teman-teman di kelompoknya: merintis kegiatan, melewati masa sulit, atau saling menguatkan.</p><p>Pertama, kami ingin tahu pengalaman Anda bersama orang-orang <span class="pill">${g}</span> dulu.</p>`,ok:()=>true}},
+    get a_juang(){return {body:`<h3>Dulu, perjuangan apa yang pernah Anda lalui bersama orang-orang <span class="pill">${g}</span>?</h3><p class="qhint">Pilih satu yang paling Anda ingat.</p>${opts('juang',JUANG,{other:true,otherPh:'Misalnya: membangun musala'})}`,ok:()=>okOpt('juang')}},
+    get a_now(){return {body:`<div class="card sepia"><div class="k">Dulu, berjuang bersama orang-orang ${g}</div><div class="v">${esc(val('juang'))}</div></div><h2 style="font-size:20px">Hidup terus bergerak</h2><p>Ada hal-hal yang <b>dulu</b> Anda lakukan bersama orang-orang <span class="pill">${g}</span>, tetapi <b>sekarang</b> Anda lakukan bersama orang lain, Anda ganti dengan kegiatan lain, atau sudah berhenti.</p><p>Hal seperti ini dialami banyak orang.</p>`,ok:()=>true}},
+    get a_conf(){return {body:`<div class="dnow"><span class="d1">Dulu ✓</span><span class="arr">→</span><span class="d2">Sekarang ✗</span></div><h3>Hal-hal ini <span class="neg">sekarang sudah tidak</span> Anda lakukan bersama orang-orang <span class="pill">${g}</span>, betul?</h3><div class="card sepia">${items().map((_,i)=>`<div class="v" style="font-size:16px">• ${esc(itemName(i))}</div>`).join('')}</div>${opts('A_CONF',['Ya, betul','Bukan, ubah pilihan'],{autoNext:true})}`,ok:()=>R.A_CONF==='Ya, betul'}},
+    get a_items(){return {body:`<div class="dnow"><span class="d1">Dulu ✓ bersama ${g}</span><span class="arr">→</span><span class="d2">Sekarang ✗ tidak lagi</span></div><h3>Pilih <b>1 sampai 3 hal</b> yang <span class="neg">sekarang sudah tidak lagi</span> Anda lakukan bersama orang-orang <span class="pill">${g}</span>, padahal <b>dulu</b> sering.</h3><p class="qhint">Boleh pilih satu saja.</p>${opts('aitems',DULU,{multi:3,other:true,otherPh:'Misalnya: latihan hadrah'})}`,ok:()=>okOpt('aitems',{multi:true})}},
+    get a_dest(){return {body:`<div class="card sepia"><div class="k">Dulu, berjuang bersama orang-orang ${g}</div><div class="v">${esc(val('juang'))}</div></div><h2 style="font-size:20px">Perjalanan sehari-hari Anda</h2><p>Bagian berikutnya tentang hal lain: perjalanan Anda dari rumah.</p><h3>Ke mana Anda paling sering pergi dari rumah?</h3>${opts('adest',DEST,{other:true,otherPh:'Misalnya: bengkel'})}`,ok:()=>okOpt('adest')}},
+    get a_places(){return {body:`<h3>Dalam perjalanan dari rumah ke <span class="pill">${esc((val('adest')||'').toLowerCase())}</span>, pilih <b>1 sampai 3 tempat</b> yang biasa Anda lewati.</h3><p class="qhint">Boleh pilih satu saja.</p>${opts('aplaces',PLACE,{multi:3,other:true,otherPh:'Misalnya: pom bensin'})}`,ok:()=>okOpt('aplaces',{multi:true})}},
+    get a_year(){return COND.a==='rd'?{body:`<h3>Kira-kira sejak tahun berapa ${items().map((_,i)=>`<span class="pill">${esc(itemShort(i))}</span>`).join(', ').replace(/, ([^,]*)$/,' dan $1')} tidak lagi Anda lakukan bersama orang-orang <span class="pill">${g}</span>?</h3><p class="qhint">Perubahan seperti ini biasanya terjadi pelan-pelan. Pilih perkiraan terdekat.</p>${wheel('Y1',Math.max(1960,R.Y0||1960),nowYear,Math.min(nowYear,Math.max(R.Y0||2015,2021)))}`,ok:()=>R.Y1!=null}
+      :{body:`<h3>Kira-kira sejak tahun berapa Anda biasa lewat jalan ini ke <span class="pill">${esc((val('adest')||'').toLowerCase())}</span>?</h3><p class="qhint">Pilih perkiraan terdekat.</p>${wheel('Y1',1960,nowYear,2021)}`,ok:()=>R.Y1!=null}},
+    get a_sum(){return {body:`<h3 style="margin-bottom:2px">${COND.a==='rd'?'Perjalanan Anda':'Rute harian Anda'}</h3><p class="qhint" style="margin:0 0 4px">Perhatikan gambar ini sejenak. 🔊 Nyalakan suara bila bisa.</p><div class="journey">${COND.a==='rd'?journeyRD():journeyK()}</div><div class="jcaps">${journeyCaps().map((c,k)=>`<p class="jcap">${c}</p>`).join('')}</div><p class="sum jsum" id="jsum">${summaryText()}</p><div style="text-align:center"><button class="replay" id="replay">↻ Putar ulang</button></div>`,ok:()=>R._sumOk===true,timer:true}},
+    get s3(){return secIntro(3,`Anda dan ${g}`,`Sekarang ada beberapa pernyataan singkat. Ketuk satu angka, lalu pernyataan berikutnya muncul sendiri. Anda sudah melewati sepertiga survei.`,'s3')},
+    get fuspic(){return fusPic('FusPic',g)},
+    get sac_i(){return {body:`<div class="secnum" style="background:#fdf1e7;color:#c2591f">🤲</div><h2>Bayangkan ${g} sedang sangat membutuhkan bantuan Anda</h2><p>Di beberapa layar berikut, kami tanyakan dulu <b>berapa yang Anda punya</b>, lalu <b>berapa yang mau Anda berikan</b> untuk <span class="pill">${g}</span>.</p><p class="muted small">Ada dua hal: uang dan waktu keluarga. Jawab sejujurnya; tidak ada jawaban yang lebih baik.</p>`,ok:()=>true}},
+    get sac_m1(){return {body:`<div class="itemhead">1 dari 2 · Uang</div><h3>Berapa kira-kira pendapatan Anda dalam sebulan?</h3><p class="qhint">Termasuk gaji, hasil usaha, atau kiriman rutin. Perkiraan saja.</p><div style="position:relative"><input class="tx big" id="inc" data-money="income" inputmode="numeric" value="${R.income?Number(R.income).toLocaleString('id-ID'):''}" placeholder="0" autocomplete="off" style="padding-left:52px" ${R.inc_none?'disabled':''}><span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:20px;font-weight:800;color:var(--s-muted)">Rp</span></div>${opts('inc_none_o',['Saya tidak punya pendapatan sendiri'],{multi:1})}`,ok:()=>R.inc_none===true||(R.income>0)}},
+    get sac_m2(){return {body:`<div class="itemhead">1 dari 2 · Uang</div><h3>Dari pendapatan itu, berapa persen yang mau Anda berikan untuk <span class="pill">${g}</span>?</h3><div class="bignum" id="bn">${R.SAC_UANG||0}%</div><div class="bigsub" id="bs">≈ ${fmtRp((R.income||0)*(R.SAC_UANG||0)/100)} dari ${fmtRp(R.income||0)}</div>${sliderGive('SAC_UANG',100,1,'100%')}<div class="viz" id="viz">${vizMoney()}</div>`,ok:()=>!!R.SAC_UANG_t}},
+    get sac_w1(){return {body:`<div class="itemhead">2 dari 4 · Kerja</div><h3>Dalam seminggu, berapa hari Anda bekerja atau menjalankan kegiatan utama Anda?</h3><p class="qhint">Kerja, kuliah, mengurus rumah, atau usaha.</p><div class="numgrid">${[1,2,3,4,5,6,7].map(d=>`<button class="nb ${R.work==String(d)?'on':''}" data-num="work" data-v="${d}">${d}<small>hari</small></button>`).join('')}</div>${opts('work_none_o',['Saya tidak bekerja dan tidak punya kegiatan rutin'],{multi:1})}`,ok:()=>!!R.work}},
+    get sac_w2(){return {body:`<div class="itemhead">2 dari 4 · Kerja</div><h3>Berapa hari kerja dalam seminggu yang mau Anda tinggalkan untuk <span class="pill">${g}</span>, walaupun penghasilan atau tugas hari itu jadi hilang?</h3><div class="bignum" id="bn">${R.SAC_KERJA||0} hari</div><div class="bigsub" id="bs">${pct(R.SAC_KERJA,R.work)}% dari ${R.work} hari kerja</div>${sliderGive('SAC_KERJA',+R.work,1,R.work+' hari')}<div class="viz" id="viz">${vizDays('SAC_KERJA',+R.work,'💼')}</div>`,ok:()=>!!R.SAC_KERJA_t}},
+    get sac_f1(){return {body:`<div class="itemhead">2 dari 2 · Keluarga</div><h3>Dalam seminggu, berapa hari Anda punya waktu berkumpul dengan keluarga?</h3><div class="numgrid">${[0,1,2,3,4,5,6,7].map(d=>`<button class="nb ${R.fam==String(d)?'on':''}" data-num="fam" data-v="${d}">${d}<small>hari</small></button>`).join('')}</div>`,ok:()=>R.fam!=null}},
+    get sac_f2(){return {body:`<div class="itemhead">2 dari 2 · Keluarga</div><h3>Berapa hari dari waktu keluarga itu yang mau Anda berikan untuk <span class="pill">${g}</span>?</h3><div class="bignum" id="bn">${R.SAC_KEL||0} hari</div><div class="bigsub" id="bs">${pct(R.SAC_KEL,R.fam)}% dari ${R.fam} hari bersama keluarga</div>${sliderGive('SAC_KEL',+R.fam,1,R.fam+' hari')}<div class="viz" id="viz">${vizDays('SAC_KEL',+R.fam,'🏠')}</div>`,ok:()=>!!R.SAC_KEL_t}},
+    get sac_s1(){return {body:`<div class="itemhead">4 dari 4 · Istirahat</div><h3>Biasanya, berapa jam Anda tidur semalam?</h3><div class="numgrid">${[4,5,6,7,8,9,10].map(d=>`<button class="nb ${R.sleep==String(d)?'on':''}" data-num="sleep" data-v="${d}">${d}<small>jam</small></button>`).join('')}</div>`,ok:()=>R.sleep!=null}},
+    get sac_s2(){return {body:`<div class="itemhead">4 dari 4 · Istirahat</div><h3>Berapa jam tidur semalam yang mau Anda kurangi untuk <span class="pill">${g}</span>?</h3><div class="bignum" id="bn">${fmtH(R.SAC_TIDUR||0)} jam</div><div class="bigsub" id="bs">${pct(R.SAC_TIDUR,R.sleep)}% dari ${R.sleep} jam tidur</div>${sliderGive('SAC_TIDUR',+R.sleep,0.5,R.sleep+' jam')}<div class="viz" id="viz">${vizSleep()}</div>`,ok:()=>!!R.SAC_TIDUR_t}},
+    get mood(){return {body:`<h3>Bagaimana perasaan Anda saat ini?</h3><p class="qhint">Tulis dengan kata-kata Anda sendiri. Satu kalimat cukup.</p><textarea class="tx" data-text="Mood" rows="4" placeholder="Misalnya: biasa saja, agak capek" style="resize:none;font-weight:500">${esc(R.Mood||'')}</textarea>`,ok:()=>(R.Mood||'').trim().length>0}},
+    get mca1(){return likertPage('MCA_END1','Seberapa setuju Anda dengan pernyataan ini?',`Orang-orang <span class="pill">${g}</span> tidak lagi banyak berperan dalam hidup saya sekarang.`,1,3,'Sangat tidak setuju','Sangat setuju')},
+    get mca2(){return likertPage('MCA_END2','Seberapa setuju Anda dengan pernyataan ini?',`Kegiatan sehari-hari saya sekarang jarang melibatkan orang-orang <span class="pill">${g}</span>.`,2,3,'Sangat tidak setuju','Sangat setuju')},
+    get mca3(){return likertPage('MCA_END3','Seberapa setuju Anda dengan pernyataan ini?',`Hal-hal yang saya jalani sekarang sudah tidak banyak berhubungan dengan orang-orang <span class="pill">${g}</span>.`,3,3,'Sangat tidak setuju','Sangat setuju')},
+    get attA(){return {body:`<h3>Di bagian "Cerita Anda" tadi, perjuangan apa yang Anda pilih bersama orang-orang <span class="pill">${g}</span>?</h3><p class="qhint">Pilih yang sesuai dengan jawaban Anda sebelumnya.</p>${opts('ATT_A',attAOpts(),{autoNext:true})}`,ok:()=>!!R.ATT_A}},
+    get s4(){return secIntro(4,'Pesan dari teman',`Anda sudah melewati lebih dari separuh survei. Di bagian ini Anda akan membaca sebuah chat singkat dan membalasnya.`,'s4')},
+    get chat_i(){return {body:`<div class="secnum" style="background:#dcf8c6;color:#0b6e5f">💬</div><h2>Bayangkan sebuah chat</h2><p>Bayangkan teman Anda, <span class="pill">${tm}</span>, yang berafiliasi dengan <span class="pill">${gt}</span>, mengirim chat kepada Anda.</p><p>Balas dengan mengetuk balasan yang paling sesuai, atau tulis balasan Anda sendiri.</p><p class="muted small">🔊 Nyalakan suara untuk pengalaman yang lebih nyata (tidak wajib).</p>`,ok:()=>true,btn:'Buka chat'}},
+    get chat(){return {chat:true,body:'',ok:()=>chatState&&chatState.done}},
+    get refb(){const of=COND.b==='of';const words=(R.REFL_B||'').trim().split(/\s+/).filter(Boolean).length;
+      return {body:of?`<div class="itemhead">Bayangkan</div><h3>Bayangkan Anda bergabung dengan <span class="pill">${gt}</span>. Lengkapi kalimat ini:</h3><div class="lkitem" style="margin-bottom:10px">Di <span class="pill">${gt}</span>, saya tetap bisa melakukan hal-hal yang penting bagi saya, yaitu …</div><textarea class="tx" data-text="REFL_B" rows="3" placeholder="Misalnya: ngajar ngaji, ngurus acara, bantu yang lagi susah">${esc(R.REFL_B||'')}</textarea><p class="qhint" style="margin-top:6px">Tulis dengan kata-kata Anda sendiri, <b>minimal 2 kata</b>. Tombol Lanjut aktif setelah itu.</p>`
+        :`<div class="itemhead">Ingat lagi</div><h3>Coba ingat lagi chat tadi. Lengkapi kalimat ini:</h3><div class="lkitem" style="margin-bottom:10px">Di chat tadi, ${tm} mengajak saya untuk …</div><textarea class="tx" data-text="REFL_B" rows="3" placeholder="Tulis singkat saja">${esc(R.REFL_B||'')}</textarea><p class="qhint" style="margin-top:6px">Tulis dengan kata-kata Anda sendiri, <b>minimal 2 kata</b>. Tombol Lanjut aktif setelah itu.</p>`,
+        ok:()=>(R.REFL_B||'').trim().split(/\s+/).filter(Boolean).length>=2}},
+    get fuspict(){return fusPic('FusPic_T',gt)},
+    get int1(){return likertPage('Int1','Seberapa setuju Anda dengan pernyataan ini?',`Saya ingin bergabung dengan kelompok <span class="pill">${gt}</span> yang diajak <span class="pill">${tm}</span>.`,1,2,'Sangat tidak setuju','Sangat setuju')},
+    get int2(){return likertPage('Int2','Seberapa setuju Anda dengan pernyataan ini?',`Saya tertarik ikut kegiatan <span class="pill">${gt}</span> lainnya nanti.`,2,2,'Sangat tidak setuju','Sangat setuju')},
+    get mcb1(){return mcbPage(1,`Di <span class="pill">${gt}</span>, saya bisa melanjutkan hal-hal yang dulu saya lakukan.`)},
+    get mcb2(){return mcbPage(2,`Di <span class="pill">${gt}</span>, kegiatan saya sekarang tetap bisa berjalan.`)},
+    get mcb3(){return mcbPage(3,`Di <span class="pill">${gt}</span>, sudah ada orang yang saya kenal.`)},
+    get attB(){return {body:`<h3>Di chat tadi, <span class="pill">${tm}</span> mengajak Anda bergabung ke mana?</h3>${opts('ATT_B',[shortAff(val('faff')),shortAff(val('aff')),'Tidak mengajak ke mana pun','Saya tidak ingat'],{autoNext:true})}`,ok:()=>!!R.ATT_B}},
+    get s5(){return secIntro(hasF()?5:4,'Penutup','Tinggal sedikit lagi: beberapa pertanyaan terakhir dan data diri singkat.','s5')},
+    get sw1(){return likertPage('Sw1','Seberapa setuju Anda dengan pernyataan ini?',`Saya ingin pindah menjadi anggota ${hasF()?`<span class="pill">${gt}</span>`:'kelompok keagamaan lain'}.`,1,1,'Sangat tidak setuju','Sangat setuju')},
+    get sw2(){return likertPage('Sw2','Seberapa setuju Anda dengan pernyataan ini?',`Saya mempertimbangkan keluar dari <span class="pill">${g}</span> untuk bergabung dengan ${hasF()?`<span class="pill">${gt}</span>`:'kelompok keagamaan lain'}.`,1,1,'Sangat tidak setuju','Sangat setuju')},
+    get swch(){return {body:`<h3>Mana yang paling menggambarkan Anda?</h3>${opts('SwCh',hasF()?[`Tetap di ${shortAff(val('aff'))} saja`,`Tetap di ${shortAff(val('aff'))}, sesekali ikut kegiatan ${shortAff(val('faff'))}`,'Aktif di keduanya',`Pindah ke ${shortAff(val('faff'))}`]:[`Tetap di ${shortAff(val('aff'))} saja`,`Tetap di ${shortAff(val('aff'))}, sesekali ikut kegiatan kelompok lain`,'Aktif di dua kelompok','Pindah ke kelompok lain'],{autoNext:true})}`,ok:()=>!!R.SwCh}},
+    get click(){return {body:`<h3>Satu pertanyaan lagi</h3><p>Beberapa kelompok punya kegiatan rutin yang terbuka untuk orang baru.</p><h3 style="font-size:16px">Apakah Anda mau melihat info cara bergabung dengan kegiatan rutin <span class="pill">${gt}</span>?</h3>${opts('click',['Ya, tampilkan infonya','Tidak, lanjut'],{autoNext:true})}`,ok:()=>!!R.click}},
+    get info(){return {body:`<h3>Cara bergabung dengan kegiatan rutin <span class="pill">${gt}</span></h3><p>Banyak kelompok keagamaan punya kegiatan rutin, misalnya pengajian, kajian, atau kegiatan sosial, yang terbuka untuk orang baru.</p><div class="card"><b>Cara yang biasa dilakukan</b><ol style="margin:6px 0 0;padding-left:20px" class="small"><li>Tanya teman yang sudah ikut.</li><li>Datang ke masjid, musala, atau kantor ${gt} terdekat dan tanyakan jadwalnya.</li><li>Lihat pengumuman di akun media sosial resmi ${gt} di daerah Anda.</li></ol></div><p class="muted small">Halaman ini hanya informasi umum dan tidak mendaftarkan Anda ke kelompok mana pun.</p>`,ok:()=>true}},
+    get ease(){return likertPage('Ease','Satu pertanyaan tentang survei ini.','Seberapa mudah tugas-tugas tadi dipahami?',1,1,'Sangat susah','Sangat mudah')},
+    get demo1(){return {body:`<h3>Data diri singkat</h3><label class="lbl">Jenis kelamin</label>${opts('Sex',['Laki-laki','Perempuan'])}<label class="lbl" for="age">Usia (tahun)</label><input class="tx" id="age" data-num2="Age" inputmode="numeric" value="${esc(R.Age||'')}" placeholder="Misalnya: 27" maxlength="2" autocomplete="off" style="max-width:140px">`,ok:()=>!!R.Sex&&+R.Age>=18&&+R.Age<=99}},
+    get demo2(){return {body:`<h3>Data diri singkat</h3><label class="lbl" for="edu">Pendidikan terakhir</label><select class="tx" id="edu" data-sel="Edu"><option value="">Pilih…</option>${['SD atau sederajat','SMP atau sederajat','SMA/SMK atau sederajat','Diploma (D1–D3)','Sarjana (S1/D4)','Magister (S2)','Doktor (S3)'].map(o=>`<option ${R.Edu===o?'selected':''}>${o}</option>`).join('')}</select><label class="lbl" for="job" style="margin-top:12px">Pekerjaan utama</label><select class="tx" id="job" data-sel="Job"><option value="">Pilih…</option>${['Pelajar atau mahasiswa','Karyawan swasta','PNS, TNI, atau Polri','Wiraswasta atau pedagang','Petani atau nelayan','Guru atau dosen','Ibu rumah tangga','Tidak bekerja','Lainnya'].map(o=>`<option ${R.Job===o?'selected':''}>${o}</option>`).join('')}</select><label class="lbl" for="prov" style="margin-top:12px">Provinsi tempat tinggal</label><select class="tx" id="prov" data-sel="Prov"><option value="">Pilih…</option>${PROV.map(o=>`<option ${R.Prov===o?'selected':''}>${o}</option>`).join('')}</select>`,ok:()=>!!R.Edu&&!!R.Job&&!!R.Prov}},
+    get debrief(){return {body:debrief()+`<div style="text-align:center;margin-top:4px"><button class="bk" id="wd" style="text-decoration:underline">Saya tidak ingin data saya dipakai</button></div>`,ok:()=>true,btn:'Saya mengerti, kirim jawaban'}},
+    get end(){return {noBack:true,body:`<div class="secintro" style="text-align:center;align-items:center"><div class="secnum" style="background:#dcf8c6;color:#0b6e5f">✓</div><h2>Jawaban Anda sudah terkirim</h2><p>Terima kasih atas waktu dan cerita Anda.</p><div class="card" style="text-align:center"><div class="small muted">Kode peserta Anda</div><div style="font:800 22px var(--mono);letter-spacing:.06em">${esc(R.CODE)}</div><div class="sendst" id="sendst"></div><div class="small muted">Simpan kode ini bila ingin menarik data Anda.</div></div><p class="muted small">Anda boleh menutup halaman ini.</p></div>`,ok:()=>false,btn:null}},
+  };
+  return P[id];
+}
+const pct=(a,b)=>b>0?Math.round((a||0)/b*100):0;
+const fmtH=h=>String(h).replace('.',',');
+function attAOpts(){const mine=val('juang');const pool=[...JUANG];let o=pool.filter(x=>x!==mine).slice(0,2);o.push(mine);o=o.sort((a,b)=>a.length-b.length);o.push('Saya tidak ingat');return o;}
+const PROV=['Aceh','Sumatera Utara','Sumatera Barat','Riau','Kepulauan Riau','Jambi','Sumatera Selatan','Kepulauan Bangka Belitung','Bengkulu','Lampung','DKI Jakarta','Jawa Barat','Banten','Jawa Tengah','DI Yogyakarta','Jawa Timur','Bali','Nusa Tenggara Barat','Nusa Tenggara Timur','Kalimantan Barat','Kalimantan Tengah','Kalimantan Selatan','Kalimantan Timur','Kalimantan Utara','Sulawesi Utara','Gorontalo','Sulawesi Tengah','Sulawesi Barat','Sulawesi Selatan','Sulawesi Tenggara','Maluku','Maluku Utara','Papua','Papua Barat','Papua Barat Daya','Papua Tengah','Papua Pegunungan','Papua Selatan'];
+
+/* ---------- sacrifice visuals ---------- */
+function vizMoney(){const p=R.SAC_UANG||0,n=Math.round(p/10);return `<div class="bills">${Array.from({length:10},(_,i)=>`<div class="bill ${i<n?'g':''}"></div>`).join('')}</div><div class="legend"><span><i style="background:#0f766e"></i>Untuk ${G()}: ${fmtRp((R.income||0)*p/100)}</span><span><i style="background:#cfe3d6;border:1px solid #9cc3aa"></i>Tetap untuk Anda: ${fmtRp((R.income||0)*(100-p)/100)}</span></div>`;}
+function vizDays(key,own,em){const g=R[key]||0;const D=['Sen','Sel','Rab','Kam','Jum','Sab','Min'];return `<div class="days">${D.map((d,i)=>`<div class="day ${i<own?'own':''} ${i<g?'g':''}"><span class="e">${i<g?'🤝':i<own?em:'·'}</span>${d}</div>`).join('')}</div><div class="legend"><span><i style="background:var(--s-acc)"></i>Untuk ${G()}: ${g} hari</span><span><i style="background:#fff;border:1.5px solid #9fb1ac"></i>Tetap milik Anda: ${own-g} hari</span></div>`;}
+function vizSleep(){const own=+R.sleep,g=R.SAC_TIDUR||0;let h='<div class="hours">';for(let i=0;i<own;i++){const fill=Math.max(0,Math.min(1,g-(own-1-i)));h+=`<div class="hr"><i style="transform:scaleX(${fill})"></i></div>`;}return h+`</div><div class="legend"><span><i style="background:#2f3f63"></i>Tidur: ${fmtH(own-g)} jam</span><span><i style="background:var(--s-acc)"></i>Untuk ${G()}: ${fmtH(g)} jam</span></div>`;}
+
+/* ---------- journey ---------- */
+function sign(x,y,t1,t2,fill,stroke,fg,cls,delay){
+  t1=String(t1);t2=t2?String(t2):'';
+  if(t1.length>18)t1=t1.slice(0,17)+'…'; if(t2.length>24)t2=t2.slice(0,23)+'…';
+  const w=Math.max(t1.length*6.1,t2.length*5)+16,h=t2?31:19;
+  return `<g class="${cls}" style="animation-delay:${delay}s"><line x1="${x}" y1="${y}" x2="${x}" y2="${y+12}" stroke="${stroke}" stroke-width="1.6"/><rect x="${x-w/2}" y="${y-h}" width="${w}" height="${h}" rx="5" fill="${fill}" stroke="${stroke}"/><text x="${x}" y="${y-h+13}" text-anchor="middle" style="font:800 10.5px var(--font);fill:${fg}">${esc(t1)}</text>${t2?`<text x="${x}" y="${y-6}" text-anchor="middle" style="font:600 9px var(--font);fill:${fg}">${esc(t2)}</text>`:''}</g>`;
+}
+const person=(x,y,col,r=6)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${col}"/><path d="M${x-r*1.6} ${y+r*3.3} q${r*1.6} -${r*3.5} ${r*3.2} 0" fill="${col}"/>`;
+const ROAD='M40 356 C 40 296, 210 306, 210 246 S 40 196, 40 146 S 200 124, 200 86 S 70 44, 40 30';
+function journeyCaps(){
+  const g=G();
+  if(COND.a==='rd') return [`Dulu, Anda berjalan bersama orang-orang <b>${g}</b>.`,`Sekitar ${R.Y1}, jalan Anda dan mereka mulai berbeda arah.`,`Sekarang, keseharian Anda dijalani <b>tanpa mereka</b>.`];
+  return ['Anda berangkat dari rumah.',`Di jalan, Anda melewati ${esc(listJoin(Array.from({length:nPlaces()},(_,i)=>place(i).toLowerCase())))}.`,`Lalu Anda sampai di ${esc((val('adest')||'').toLowerCase())}.`];
+}
+function journeyRD(){
+  const brown='#8a6f4a',n=items().length;
+  const hasNew=items().some((_,i)=>R['ast'+i]!=='Sudah berhenti saja');
+  const oldPt=[[92,312],[150,282],[150,238]],newPt=[[66,170],[104,120],[150,72]];
+  let s=`<svg id="jsvg" viewBox="0 0 318 372" role="img" aria-label="Animasi perjalanan: dulu berjalan bersama orang-orang kelompok, lalu jalan mereka berbeda arah, sekarang bersama orang lain"><g transform="translate(36,0)">`;
+  s+=`<path class="j-road" d="${ROAD}" pathLength="100" stroke="#e7ece9" stroke-width="24" fill="none" stroke-linecap="round"/>`;
+  s+=`<g id="past"><line id="tlpast" x1="-22" y1="356" x2="-22" y2="356" stroke="#b39a74" stroke-width="9" stroke-linecap="round"/><text id="tlpastlab" opacity="0" style="font:800 9px var(--font);fill:#8a6f4a" text-anchor="middle">bersama orang-orang ${esc(G())}</text><path id="jpast" d="${ROAD}" pathLength="100" stroke="#e3d4b8" stroke-width="24" fill="none" stroke-linecap="round" opacity="0"/>`;
+  s+=sign(150,350,val('juang'),'berjuang bersama mereka','#e3d4b8','#b39a74','#4a3b26','sg',0);
+  for(let i=0;i<n;i++){const [x,y]=oldPt[i];s+=sign(x,y,itemShort(i).replace(/^./,c=>c.toUpperCase()),'bersama mereka','#efe6d8','#c9b79c','#5b4a33','sg',0).replace('<g class="sg"',`<g class="sg" data-ax="${x}" data-ay="${y+12}"`);}
+  s+=`<text x="54" y="369" style="font:800 10.5px var(--font);fill:${brown}">DULU · mulai ${R.Y0||''}</text></g>`;
+  s+=`<path id="jnow" d="${ROAD}" pathLength="100" stroke="#cdebe4" stroke-width="24" fill="none" stroke-linecap="round" opacity="0"/>`;
+  s+=`<path d="${ROAD}" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 6" fill="none" class="fade" style="animation-delay:1.6s"/>`;
+  s+=`<path id="jgap" d="${ROAD}" pathLength="100" stroke="#ffffff" stroke-width="30" fill="none" opacity="0"/>`;
+  s+=`<g class="fade" style="animation-delay:.4s"><path id="jb" d="M120 194 C 186 186, 258 194, 260 150 S 262 80, 266 48" pathLength="100" stroke="#e7ece9" stroke-width="20" fill="none" stroke-linecap="round"/><path id="jbprog" d="M120 194 C 186 186, 258 194, 260 150 S 262 80, 266 48" pathLength="100" stroke="#e3d4b8" stroke-width="20" fill="none" stroke-linecap="round" stroke-dasharray="0 200"/><path d="M120 194 C 186 186, 258 194, 260 150 S 262 80, 266 48" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 5" fill="none"/><g transform="translate(266,48)"><path d="M0 0 C -8 -10 -9 -14 -9 -18 A 9 9 0 1 1 9 -18 C 9 -14 8 -10 0 0Z" fill="#a9825a"/><circle cy="-18" r="3.5" fill="#fff"/></g><text x="252" y="22" text-anchor="end" id="jbend" opacity="0" style="font:800 9.5px var(--font);fill:#8a6f4a">tujuan mereka</text></g><g class="fade" style="animation-delay:1.8s"><circle id="jx" cx="120" cy="194" r="17" fill="none" stroke="#8a6f4a" stroke-width="1.6" stroke-dasharray="3 3"/></g>`;
+  s+=`<g id="jbranch" opacity="0"><text x="240" y="186" text-anchor="end" style="font:700 9.5px var(--font);fill:${brown}">rute mereka</text><text x="6" y="214" style="font:800 9.5px var(--font);fill:#4a5a6c"><tspan x="6">Sekitar ${R.Y1||''}:</tspan><tspan x="6" dy="11">arah jalan mulai</tspan><tspan x="6" dy="11">berbeda</tspan></text></g>`;
+  for(let i=0;i<n&&hasNew;i++){const [x,y]=newPt[i];const st=R['ast'+i];let g;
+    if(st==='Sudah berhenti saja') g=sign(x,y,itemShort(i).replace(/^./,c=>c.toUpperCase()),'sudah berhenti','#f1f3f2','#a7b0ad','#6b7773','sg',0);
+    else{const what=st===ST_OPTS[1]?(R['arep'+i]||''):itemShort(i);const w=whoShort(i);g=sign(x,y,what.replace(/^./,c=>c.toUpperCase()),w==='sendiri'?'sendiri':'bersama '+w,'#ffffff','#4c9a84','#1d5a4b','sg',0);}
+    s+=g.replace('<g class="sg"',`<g class="sg nw" data-ax="${x}" data-ay="${y+12}"`);
+  }
+  s+=`<g transform="translate(40,30)" class="fade" style="animation-delay:.6s"><path d="M0 0 C -8 -10 -9 -14 -9 -18 A 9 9 0 1 1 9 -18 C 9 -14 8 -10 0 0Z" fill="#0f766e" transform="translate(20,8)"/><circle cx="20" cy="-10" r="3.5" fill="#fff"/></g><text id="jnowlab" x="72" y="22" text-anchor="start" opacity="0" style="font:800 11px var(--font);fill:#0f766e">SEKARANG · ${nowYear}</text>`;
+  s+=`<g id="jties">${[0,1,2].map(k=>`<line class="tie" x1="0" y1="0" x2="0" y2="0" stroke="#b8925c" stroke-width="2.2" stroke-linecap="round" opacity="0"/>`).join('')}</g>`;
+  s+=[0,1,2].map(k=>`<g class="gp" opacity="0">${person(0,-12,brown,4.5)}</g>`).join('');
+  s+=[0,1].map(k=>`<g class="cmp" opacity="0">${person(0,-12,k?'#7a4fa0':'#3d6fb0',4.5)}</g>`).join('');
+  s+=`<g id="jtl"><line x1="-22" y1="30" x2="-22" y2="356" stroke="#e7ece9" stroke-width="4" stroke-linecap="round"/><text x="-14" y="359" style="font:800 9px var(--font);fill:#8a6f4a">${R.Y0||''}</text><text x="-14" y="33" style="font:800 9px var(--font);fill:#0f766e" id="tltop" opacity="0" display="none">${nowYear}</text><text id="tlY1" x="-14" y="0" opacity="0" style="font:800 9px var(--font);fill:#4a5a6c">${R.Y1||''}</text><line id="tlnow" x1="-22" y1="0" x2="-22" y2="0" stroke="#9aa6a2" stroke-width="2" stroke-dasharray="3 4" stroke-linecap="round"/><text id="tlnowlab" opacity="0" style="font:800 9px var(--font);fill:#6b7773" text-anchor="middle">tanpa mereka</text><g id="tlm"><circle r="6" fill="#e0672f" stroke="#fff" stroke-width="2"/><rect x="9" y="-9" width="36" height="18" rx="6" fill="#fff" stroke="#cfd8d5"/><text id="tlyr" x="27" y="4" text-anchor="middle" style="font:800 10px var(--font);fill:#1a2421">${R.Y0||''}</text></g></g>`;
+  s+=`<g id="jme"><circle class="mec" r="8" fill="#e0672f" stroke="#fff" stroke-width="2.5"/><text y="-12" text-anchor="middle" style="font:800 9px var(--font);fill:#c2591f">Saya</text></g>`;
+  return s+'</g></svg>';
+}
+function journeyK(){
+  const n=nPlaces();const pt=[[92,312],[176,226],[104,120]];
+  let s=`<svg id="jsvg" viewBox="0 0 318 372" role="img" aria-label="Animasi rute harian dari rumah ke tujuan"><g transform="translate(36,0)">`;
+  s+=`<path class="j-road" d="${ROAD}" pathLength="100" stroke="#e7ece9" stroke-width="24" fill="none" stroke-linecap="round"/><path id="jnow" d="${ROAD}" pathLength="100" stroke="#cdebe4" stroke-width="24" fill="none" stroke-linecap="round" opacity="0"/><path d="${ROAD}" stroke="#fff" stroke-width="1.5" stroke-dasharray="5 6" fill="none" class="fade" style="animation-delay:1.6s"/>`;
+  s+=`<g><rect x="10" y="330" width="30" height="22" fill="#5a7d9a"/><path d="M6 332 L25 319 L44 332Z" fill="#5a7d9a"/></g><text x="54" y="369" style="font:800 10.5px var(--font);fill:#1a2421">RUMAH SAYA</text>`;
+  s+=`<g id="jdest" opacity="0"><rect x="60" y="14" width="30" height="30" fill="#7d8a96"/><rect x="66" y="20" width="6" height="6" fill="#fff"/><rect x="78" y="20" width="6" height="6" fill="#fff"/><rect x="70" y="32" width="8" height="12" fill="#fff"/><text x="98" y="26" text-anchor="start" style="font:800 11px var(--font);fill:#0f766e">${esc((val('adest')||'').toUpperCase())}</text></g>`;
+  for(let i=0;i<n;i++){const [x,y]=pt[i];const vis=R['avis'+i]===VIS_OPTS[1];s+=sign(x,y,place(i),vis?'singgah: '+(R['apur'+i]||''):'lewat saja','#f6f8f7','#c8d2cf','#1a2421','sg',0).replace('<g class="sg"',`<g class="sg nw" data-ax="${x}" data-ay="${y+12}"`);}
+  s+=`<text id="jklab" x="6" y="214" opacity="0" style="font:700 9.5px var(--font);fill:#1a2421"><tspan x="6">rute harian Anda,</tspan><tspan x="6" dy="11">sejak ± ${R.Y1||''}</tspan></text>`;
+  s+=`<g id="jtl"><line x1="-22" y1="30" x2="-22" y2="356" stroke="#e7ece9" stroke-width="4" stroke-linecap="round"/><text x="-14" y="359" style="font:800 9px var(--font);fill:#3d5a72">06.30</text><text x="-14" y="33" style="font:800 9px var(--font);fill:#0f766e" id="tltop" opacity="0" display="none">07.25</text><line id="tlk" x1="-22" y1="356" x2="-22" y2="356" stroke="#5a7d9a" stroke-width="5" stroke-linecap="round"/><text id="tlklab" opacity="0" style="font:800 9px var(--font);fill:#3d5a72" text-anchor="middle">rute harian Anda</text><g id="tlm"><circle r="6" fill="#5a7d9a" stroke="#fff" stroke-width="2"/><rect x="9" y="-9" width="36" height="18" rx="6" fill="#fff" stroke="#cfd8d5"/><text id="tlyr" x="27" y="4" text-anchor="middle" style="font:800 10px var(--font);fill:#1a2421">06.30</text></g></g>`;
+  s+=`<g id="jme"><circle r="8" fill="#5a7d9a" stroke="#fff" stroke-width="2.5"/><text y="-12" text-anchor="middle" style="font:800 9px var(--font);fill:#3d5a72">Saya</text></g>`;
+  return s+'</g></svg>';
+}
+let jRAF=null;
+function cancelJourney(){if(jRAF){cancelAnimationFrame(jRAF);jRAF=null;}SFX.padStop();}
+function runJourney(){
+  cancelJourney();
+  const svg=$('#jsvg'); if(!svg) return;
+  const rd=COND.a==='rd';
+  const road=svg.querySelector('.j-road'), L=road.getTotalLength();
+  const P=f=>road.getPointAtLength(Math.max(0,Math.min(1,f))*L);
+  const near=(x,y)=>{let best=1e9,bf=0;for(let k=0;k<=300;k++){const p=P(k/300);const d=(p.x-x)**2+(p.y-y)**2;if(d<best){best=d;bf=k/300;}}return bf;};
+  const fb=rd?near(120,194):1;
+  const me=svg.querySelector('#jme'),signs=[...svg.querySelectorAll('.sg')];
+  signs.forEach(g=>{g.style.opacity=0;g.dataset.f=g.dataset.ax?near(+g.dataset.ax,+g.dataset.ay):0;});
+  const caps=[...document.querySelectorAll('.jcap')], sum=$('#jsum');
+  const ease=x=>{x=Math.max(0,Math.min(1,x));return x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;};
+  const show=el=>{if(el&&!el.classList.contains('in'))el.classList.add('in');};
+  const pop=g=>{if(g.dataset.shown)return;g.dataset.shown=1;g.style.opacity='';g.classList.add('pop');SFX.blip(g.classList.contains('nw')&&rd?2:1);};
+  const fired=new Set(); const once=(k,fn)=>{if(!fired.has(k)){fired.add(k);fn();}};
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let t0=performance.now(); /* animation is the manipulation: always plays, even with reduced-motion */
+  const set=(el,a,v)=>el&&el.setAttribute(a,v);
+  if(rd){set(svg.querySelector('#jpast'),'stroke-dasharray',`${fb*100} 200`);set(svg.querySelector('#jnow'),'stroke-dasharray',`0 ${fb*100} ${100-fb*100} 200`);}
+  const Y0=+R.Y0||nowYear-10,Y1=+R.Y1||nowYear-3;
+  const ties=[...svg.querySelectorAll('.tie')],gps=[...svg.querySelectorAll('.gp')],br=svg.querySelector('#jb'),BL=br?br.getTotalLength():0;
+  const cmps=[...svg.querySelectorAll('.cmp')]; let joinF=null; const hasNew=items().some((_,i)=>R['ast'+i]!=='Sudah berhenti saja');
+  if(rd){const nw=[...svg.querySelectorAll('.sg.nw')];const idx=items().findIndex((_,i)=>R['ast'+i]!=='Sudah berhenti saja'&&whoShort(i)&&whoShort(i)!=='sendiri');if(idx>=0&&nw[idx])joinF=+nw[idx].dataset.f;}
+  function frame(now){
+    const t=now-t0;
+    if(rd){
+      const TF=5000,TG=5900,TE=10000;
+      once('pad',()=>SFX.pad('warm'));
+      set(svg.querySelector('#jpast'),'opacity',1);
+      let mf,mt;
+      if(t<TF) mt=ease((t-1200)/(TF-1200))*fb; else if(t<TG) mt=fb; else mt=fb+ease((t-TG)/(TE-TG))*(1-fb);
+      mf=mt;
+      set(svg.querySelector('#jpast'),'stroke-dasharray',`${Math.min(mf,fb)*100} 200`);
+      if(mf>fb) {set(svg.querySelector('#jnow'),'opacity',1);set(svg.querySelector('#jnow'),'stroke-dasharray',`0 ${fb*100} ${(mf-fb)*100} 200`);}
+      const pm=P(mf); me.setAttribute('transform',`translate(${pm.x},${pm.y})`);
+      const off=[[-13,7],[13,7],[0,15]];
+      let gpos;
+      if(t<TF+300){gpos=off.map(([dx,dy],k)=>({x:pm.x+dx,y:pm.y+dy,o:Math.min(1,t/500)}));}
+      else{const w0=ease((t-TF-300)/3000);set(svg.querySelector('#jbprog'),'stroke-dasharray',`${w0*100} 200`);
+        gpos=off.map(([dx,dy],k)=>{const w=Math.max(0,w0-.05*k);const p=br.getPointAtLength(w*BL);const m=Math.min(1,w*6);return {x:p.x+dx*(1-m)+(k-1)*4*m,y:p.y+dy*(1-m)-2*m,o:1};});
+        if(w0>=1) once('bend',()=>{const e=svg.querySelector('#jbend');e.style.transition='opacity .8s';e.setAttribute('opacity',1);});}
+      { const fy=P(fb).y, tm=svg.querySelector('#tlm'), pt=P(mt); tm.setAttribute('transform',`translate(-22,${pt.y})`);
+        const yr=mt<=fb?Math.round(Y0+(Y1-Y0)*(fb?mt/fb:1)):Math.round(Y1+(nowYear-Y1)*((mt-fb)/(1-fb||1)));
+        const ye=svg.querySelector('#tlyr'); if(ye.textContent!=String(yr)) ye.textContent=yr;
+        set(svg.querySelector('#tlpast'),'y2',mt<=fb?pt.y:fy);
+        const tn=svg.querySelector('#tlnow'); set(tn,'y1',fy); set(tn,'y2',mt>fb?pt.y:fy);
+        const pl=svg.querySelector('#tlpastlab'); set(pl,'transform',`translate(-29,${(356+fy)/2}) rotate(-90)`); if(t>1600) set(pl,'opacity',1);
+        const nl=svg.querySelector('#tlnowlab'); set(nl,'transform',`translate(-29,${(fy+30)/2}) rotate(-90)`);
+        if(mt>fb+.05){ set(svg.querySelector('#tlY1'),'y',fy+3); set(svg.querySelector('#tlY1'),'opacity',1); set(nl,'opacity',1);}
+        tm.querySelector('circle').setAttribute('fill',mt>fb?'#9aa6a2':'#e0672f'); }
+      gps.forEach((g,k)=>{g.setAttribute('transform',`translate(${gpos[k].x},${gpos[k].y})`);g.setAttribute('opacity',gpos[k].o);});
+      const tieO=t<TF+500?Math.min(.9,t/600):Math.max(0,.9-(t-TF-700)/600);
+      ties.forEach((l,k)=>{set(l,'x1',pm.x);set(l,'y1',pm.y);set(l,'x2',gpos[k].x);set(l,'y2',gpos[k].y-8);set(l,'opacity',tieO);set(l,'stroke-dasharray',t>TF+500?`${Math.max(1,6-(t-TF-500)/100)} ${Math.min(10,(t-TF-500)/50)}`:'none');});
+      signs.forEach(g=>{if(!g.classList.contains('nw')&&(mf>=+g.dataset.f-0.03||g.dataset.ax===undefined&&t>900)){pop(g);}});
+      if(t>800) show(caps[0]);
+      if(t>TF-200){once('b',()=>{svg.querySelector('#jbranch').style.transition='opacity .8s';svg.querySelector('#jbranch').setAttribute('opacity',1);const jx=svg.querySelector('#jx');if(jx){jx.classList.add('jxp');jx.setAttribute('stroke-dasharray','none');jx.setAttribute('stroke-width','2.4');}});}
+      if(t>TF+700){once('snap',()=>{SFX.padStop();SFX.snap();const mc=svg.querySelector('.mec');if(mc)mc.classList.add('shake');svg.querySelector('#past').classList.add('pastfade');show(caps[1]);});}
+      signs.forEach(g=>{if(g.classList.contains('nw')&&mf>fb&&mf>=+g.dataset.f-0.03){pop(g);}});
+      // companions join at the first present stop done with other people
+      if(joinF!==null&&mf>=joinF-0.02){ cmps.forEach((c,k)=>{const p=P(Math.max(joinF,mf-0.03*(k+1)));c.setAttribute('transform',`translate(${p.x+(k?9:-9)},${p.y+6})`);if(!c.dataset.on){c.dataset.on=1;c.style.transition='opacity .6s';c.setAttribute('opacity',1);}}); }
+      if(t>TE-100){once('new',()=>{SFX.settle();svg.querySelector('#jnowlab').style.transition='opacity .8s';svg.querySelector('#jnowlab').setAttribute('opacity',1);show(caps[2]);});}
+      if(t>TE+700){once('sum',()=>{sum&&sum.classList.add('in');});}
+      if(t<TE+900) jRAF=requestAnimationFrame(frame); else jRAF=null;
+    } else {
+      once('pad',()=>SFX.pad('neutral'));
+      set(svg.querySelector('#jnow'),'opacity',Math.min(1,t/900));
+      const mf=ease((t-1200)/6000); const pm=P(mf); me.setAttribute('transform',`translate(${pm.x},${pm.y})`);
+      { const tm=svg.querySelector('#tlm'); tm.setAttribute('transform',`translate(-22,${pm.y})`); const m=Math.round(55*mf),hh=6+Math.floor((30+m)/60),mm=(30+m)%60; svg.querySelector('#tlyr').textContent=String(hh).padStart(2,'0')+'.'+String(mm).padStart(2,'0');
+        set(svg.querySelector('#tlk'),'y2',pm.y); const kl=svg.querySelector('#tlklab'); set(kl,'transform','translate(-29,193) rotate(-90)'); if(t>1600) set(kl,'opacity',1); if(mf>.985) set(svg.querySelector('#tltop'),'opacity',1); }
+      signs.forEach(g=>{if(mf>=+g.dataset.f-0.03){pop(g);}});
+      if(t>800) show(caps[0]);
+      if(t>3200) show(caps[1]);
+      if(t>4600){once('lab',()=>{SFX.padStop();const l=svg.querySelector('#jklab');l.style.transition='opacity .8s';l.setAttribute('opacity',1);});}
+      if(t>7300){once('dest',()=>{SFX.settle();const d=svg.querySelector('#jdest');d.style.transition='opacity .8s';d.setAttribute('opacity',1);show(caps[2]);});}
+      if(t>8400){once('sum',()=>{sum&&sum.classList.add('in');});}
+      if(t<9000) jRAF=requestAnimationFrame(frame); else jRAF=null;
+    }
+  }
+  jRAF=requestAnimationFrame(frame);
+}
+function listJoin(a){return a.length<2?a.join(''):a.slice(0,-1).join(', ')+' dan '+a[a.length-1];}
+function summaryText(){
+  const g=G();
+  if(COND.a==='rd'){
+    const cl=items().map((_,i)=>{const st=R['ast'+i],nm=itemShort(i),w=whoShort(i);
+      if(st==='Sudah berhenti saja') return `${nm} sudah tidak Anda lakukan lagi`;
+      if(st===ST_OPTS[1]) return `${nm} Anda ganti dengan ${esc((R['arep'+i]||'').toLowerCase())}${w==='sendiri'?' yang Anda jalani sendiri':' bersama '+esc(w)}`;
+      return `${nm} Anda jalani ${w==='sendiri'?'sendiri':'bersama '+esc(w)}`;});
+    return `Dulu, Anda dan orang-orang <span class="pill">${g}</span> pernah berjuang bersama: ${esc((val('juang')||'').toLowerCase())}. Sejak sekitar ${R.Y1}, ${listJoin(cl)}. Semua itu <b>bukan lagi bersama orang-orang ${g}</b>.`;
+  }
+  const n=nPlaces(),ps=[],sg=[],lw=[];for(let i=0;i<n;i++){const p=place(i).toLowerCase();ps.push(p);(R['avis'+i]===VIS_OPTS[1]?sg:lw).push(p);}
+  return `Dari rumah ke ${esc((val('adest')||'').toLowerCase())}, Anda biasa melewati ${esc(listJoin(ps))}. ${sg.length?esc(listJoin(sg)).replace(/^./,c=>c.toUpperCase())+' Anda singgahi':''}${sg.length&&lw.length?', ':''}${lw.length?(sg.length?esc(listJoin(lw)):esc(listJoin(lw)).replace(/^./,c=>c.toUpperCase()))+' hanya Anda lewati':''}. Rute ini Anda lewati sejak sekitar ${R.Y1}.`;
+}
+
+/* ---------- debrief ---------- */
+function debrief(){
+  const g=G(),gt=GT(),tm=TM();
+  return `<h2>Terima kasih. Ini penjelasan tentang penelitian ini</h2>
+  <div class="card"><b>Apa tujuan penelitian ini?</b><p class="small" style="margin:4px 0 0">Kami ingin memahami bagaimana hubungan dengan orang-orang di kelompok keagamaan membantu seseorang merasa dirinya tetap utuh dan tersambung dari dulu, sekarang, sampai nanti, dan bagaimana rasa itu berkaitan dengan rasa menyatu dengan kelompoknya.</p></div>
+  <div class="card"><b>Apa yang sebenarnya kami ubah?</b><p class="small" style="margin:4px 0 0">Peserta dibagi secara acak. Sebagian diminta mengingat hal-hal yang dulu dilakukan bersama orang-orang ${g} tetapi sekarang tidak lagi; sebagian lain menceritakan rute perjalanan sehari-hari. Kami tidak menjelaskan ini di awal karena penjelasan itu bisa memengaruhi jawaban.</p></div>
+  ${hasF()?`<div class="card" style="background:#fff7ed;border-color:#f3c99a"><b>Tentang chat dari ${tm}</b><p class="small" style="margin:4px 0 0">Chat tadi <b>tidak dikirim oleh teman Anda</b>. Isinya ditulis oleh peneliti dan hanya dibayangkan. ${tm} tidak tahu dan tidak terlibat dalam survei ini. Ajakan bergabung dengan ${gt} tidak nyata, dan jawaban Anda tidak dikirim ke siapa pun. Peserta lain menerima isi chat yang berbeda.</p></div>`:''}
+  <div class="card"><b>Penting untuk diketahui</b><p class="small" style="margin:4px 0 0">Penelitian ini tidak menilai kelompok mana pun. Perubahan hubungan dengan sebuah kelompok adalah hal yang wajar dan dialami banyak orang. Tidak ada jawaban yang benar atau salah.</p></div>
+  <div class="card"><b>Kerahasiaan dan hak Anda</b><p class="small" style="margin:4px 0 0">Data Anda anonim dan dianalisis secara berkelompok. Bila ingin menarik data, hubungi peneliti dengan kode peserta yang muncul di layar berikutnya, paling lambat 30 hari setelah mengisi.</p></div>
+  <div class="card"><b>Bila ada rasa tidak nyaman</b><p class="small" style="margin:4px 0 0">Bila survei ini memunculkan perasaan yang mengganggu, Anda boleh menghubungi peneliti, atau layanan konseling SEJIWA di 119 ext. 8.</p></div>
+  <div class="card"><b>Kontak peneliti</b><p class="small" style="margin:4px 0 0">Aryodi Wahyu Kurniawan, S.Psi., M.Si., Fakultas Psikologi Universitas Indonesia · waryodi@gmail.com</p></div>
+  <p class="small muted">Mohon tidak menceritakan isi survei ini kepada orang yang mungkin akan ikut, supaya hasilnya tetap bermakna.</p>`;
+}
+
+/* ================= chat engine ================= */
+/* ================= sound & feedback ================= */
+let AC=null,soundOn=false,MASTER=null;
+const ac=()=>{try{if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();const lp=AC.createBiquadFilter();lp.type='lowpass';lp.frequency.value=2400;lp.Q.value=.3;MASTER=AC.createGain();MASTER.gain.value=.6;MASTER.connect(lp);lp.connect(AC.destination);}if(AC.state==='suspended')AC.resume();}catch(e){}return AC;};
+document.addEventListener('pointerdown',()=>ac(),{once:true});
+function tone(f,dur,{type='sine',vol=.06,at=0,glide=null,attack=.03}={}){
+  if(!soundOn)return; const a=ac(); if(!a)return;
+  const t=a.currentTime+at,o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(glide)o.frequency.exponentialRampToValueAtTime(glide,t+dur);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+attack);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  o.connect(g);g.connect(MASTER);o.start(t);o.stop(t+dur+.05);
+}
+let padNodes=[];
+/* all sounds soft: sine only, slow attack, low volume, filtered */
+const SFX={
+  tap(){tone(560,.08,{vol:.03,attack:.01});},
+  select(){tone(660,.12,{vol:.045,attack:.015});tone(880,.16,{vol:.035,at:.06,attack:.02});},
+  tick(){tone(1100,.04,{vol:.012,attack:.005});},
+  ready(){tone(784,.18,{vol:.03});tone(1047,.24,{vol:.025,at:.09});},
+  success(){[523,659,784].forEach((f,i)=>tone(f,.35,{vol:.04,at:i*.1,attack:.03}));},
+  fanfare(){[523,659,784,1047].forEach((f,i)=>tone(f,.5,{vol:.045,at:i*.13,attack:.04}));tone(1319,.9,{vol:.035,at:.6,attack:.08});},
+  blip(k=1){tone(k===2?784:659,.3,{vol:.025,attack:.04});},
+  pad(kind){ if(!soundOn)return; const a=ac(); if(!a)return; SFX.padStop();
+    const fs=kind==='warm'?[261.6,329.6,392]:[293.7,370,440];
+    fs.forEach(f=>{const o=a.createOscillator(),g=a.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,a.currentTime);g.gain.exponentialRampToValueAtTime(.014,a.currentTime+2.2);o.connect(g);g.connect(MASTER);o.start();padNodes.push([o,g]);});},
+  padStop(){ if(!AC)return; padNodes.forEach(([o,g])=>{try{g.gain.cancelScheduledValues(AC.currentTime);g.gain.setValueAtTime(Math.max(.0002,g.gain.value),AC.currentTime);g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+1.6);o.stop(AC.currentTime+1.7);}catch(e){}}); padNodes=[]; },
+  snap(){ [392,349.2,293.7].forEach((f,i)=>tone(f,1.3,{vol:.03,at:i*.45,attack:.25})); },
+  settle(){ tone(440,1.6,{vol:.028,attack:.3}); tone(554.4,1.6,{vol:.022,at:.2,attack:.3}); },
+  msgIn(){tone(880,.12,{vol:.05});tone(1175,.18,{vol:.04,at:.09});},
+  msgOut(){tone(620,.12,{vol:.035,glide:900});}
+};
+function haptic(ms=8){try{navigator.vibrate&&navigator.vibrate(ms);}catch(e){}}
+function confetti(n=46){
+  const app=$('#app');const box=document.createElement('div');box.className='confetti';const cols=['#0f766e','#e0672f','#f5b700','#3d6fb0','#7a4fa0','#34b7f1'];
+  for(let k=0;k<n;k++){const i=document.createElement('i');const dx=(Math.random()-.5)*360,dy=-(160+Math.random()*260);i.style.cssText=`left:${46+Math.random()*8}%;--dx:${dx}px;--dy:${dy}px;--r:${(Math.random()-.5)*900}deg;background:${cols[k%cols.length]};animation-delay:${Math.random()*.12}s;${k%3===0?'border-radius:50%;width:8px;height:8px;':''}`;box.appendChild(i);}
+  app.appendChild(box);setTimeout(()=>box.remove(),2000);
+}
+function toast(msg){const app=$('#app');const t=document.createElement('div');t.className='toast';t.innerHTML=msg;app.appendChild(t);setTimeout(()=>t.classList.add('out'),2300);setTimeout(()=>t.remove(),2800);}
+function beep(kind){kind==='in'?SFX.msgIn():SFX.msgOut();}
+function script(){
+  const g=shortAff(val('aff')),gt=shortAff(val('faff'));
+  const ask=(key,opts,other=true)=>({ask:key,opts,other});
+  const close=[{in:'Yuk ikut, nanti aku kabarin tempat sama jamnya.'}, ask('REPLY',['Iya, aku mau ikut','Maaf ya, aku belum bisa ikut. Makasih udah ngajak.'],false), {close:true}];
+  if(COND.b==='of') return [
+    {in:'Assalamualaikum.'}, ask('B_SALAM',['Waalaikumsalam.']),
+    {in:`Eh, sekarang aku ikut kelompok rutin di ${gt}. Aku kepikiran ngajak kamu.`},
+    {in:`Dulu di ${g} kamu biasanya ngapain aja?`}, ask('Q1_of',['Ikut pengajian/kajian','Ikut kumpul-kumpul aja','Ngajar atau ngaji bareng','Ngurus acara','Kegiatan sosial (santunan, takziah)','Urusan teknis (sound, dokumentasi)']),
+    {in:'Oke. Kalau sekarang lagi sibuk apa?'}, ask('Q2_of',['Kerja','Ngurus anak dan keluarga','Kuliah','Usaha sendiri']),
+    {in:'Nah, pas. Yang biasa kamu kerjain dulu, bisa kamu lakuin lagi di sini.',key:true},
+    {in:'Kesibukan kamu sekarang juga tetap bisa jalan kok, malah bisa nyambung sama kegiatan teman-teman di sini.',key:true},
+    ...close];
+  return [
+    {in:'Assalamualaikum.'}, ask('B_SALAM',['Waalaikumsalam.']),
+    {in:`Eh, sekarang aku ikut kelompok rutin di ${gt}. Aku kepikiran ngajak kamu.`},
+    {in:'Biasanya kamu longgarnya kapan?'}, ask('Q1_ne',['Pagi','Siang','Sore','Malam','Akhir pekan']),
+    {in:'Oke. Kamu sekarang ke mana-mana biasanya naik apa?'}, ask('Q2_ne',['Motor','Mobil','Angkutan umum','Ojek','Jalan kaki']),
+    {in:'Oke kalau gitu. Nanti aku cariin jadwal yang pas sama waktu kamu.',key:true},
+    {in:'Lokasinya juga nanti aku kirim, sekalian rute yang paling gampang biar nggak bingung ke sininya.',key:true},
+    ...close];
+}
+const hhmm=()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+'.'+String(d.getMinutes()).padStart(2,'0')};
+function chatUI(){
+  const tm=TM();
+  return `<div class="chat" id="chat"><div class="ch"><button id="chatback" aria-label="Kembali"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></button><div class="av">${esc(tm.replace(/[^A-Za-z]/g,'').slice(0,1)||'A')}</div><div class="nm"><b>${tm}</b><span id="cst">online</span></div><button id="snd" aria-label="Suara">${soundOn?'🔊':'🔇'}</button></div><div class="wall" id="wall"><div class="daytag">Hari ini</div><div class="enc">🔒 Pesan dan panggilan terenkripsi secara end-to-end.</div></div><div class="qr" id="qr"></div><div class="ib" id="ib"><div class="field"><input id="cin" placeholder="Ketik jawaban sendiri…" disabled autocomplete="off" aria-label="Tulis balasan sendiri"></div><button class="send" id="csend" disabled aria-label="Kirim"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M3 20l18-8L3 4v6l12 2-12 2z" fill="#fff"/></svg></button></div></div>`;
+}
+function chatStart(){
+  const app=$('#app'); const old=$('#chat'); if(old) old.remove();
+  app.insertAdjacentHTML('beforeend',chatUI());
+  $('#chatback').onclick=()=>back();
+  $('#snd').onclick=()=>{toggleSound();$('#snd').textContent=soundOn?'🔊':'🔇';};
+  if(!chatState||chatState.cond!==COND.b){chatState={cond:COND.b,steps:script(),i:0,log:[],done:false};}
+  chatState.gen=(chatState.gen||0)+1; chatState._last=null;
+  const wall=$('#wall');
+  const stick=()=>{wall.scrollTop=wall.scrollHeight;};
+  try{new ResizeObserver(stick).observe(wall);}catch(e){}
+  new MutationObserver(()=>requestAnimationFrame(stick)).observe(wall,{childList:true,subtree:true});
+  chatState.log.forEach(m=>addMsg(m,false));
+  if(chatState.done) showDone(false); else runStep();
+  setTimeout(()=>wall.scrollTop=wall.scrollHeight,0);
+}
+function addMsg(m,anim=true){
+  const wall=$('#wall'); if(!wall) return;
+  const prev=chatState._last;
+  const el=document.createElement('div');
+  el.className=`m ${m.from} ${prev===m.from?'cont':'first'}`; if(!anim) el.style.animation='none';
+  el.innerHTML=`${esc(m.text)}<span class="t">${m.t}${m.from==='out'?`<svg class="tick ${m.read?'read':''}" width="16" height="11" viewBox="0 0 16 11"><path d="M1 6l3 3 6-7M6 9l1 1 7-8" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>`:''}</span>`;
+  wall.appendChild(el); chatState._last=m.from; m.el=el;
+  wall.scrollTo({top:wall.scrollHeight,behavior:anim?'smooth':'auto'});
+}
+function markRead(){chatState.log.forEach(m=>{if(m.from==='out'&&!m.read){m.read=true;m.el&&m.el.querySelector('.tick')?.classList.add('read');}});}
+function runStep(){
+  const st=chatState.steps[chatState.i]; if(!st) return;
+  const wall=$('#wall'); if(!wall) return; const gen=chatState.gen, live=()=>gen===chatState.gen&&$('#wall');
+  if(st.in){
+    const txt=typeof st.in==='function'?st.in():st.in;
+    const delay=st.key?Math.min(2600,900+txt.length*20):Math.min(1800,500+txt.length*15);
+    setTimeout(()=>{ if(!live())return; markRead(); $('#cst').textContent='mengetik…';
+      const ty=document.createElement('div');ty.className='typing';ty.innerHTML='<i></i><i></i><i></i>';wall.appendChild(ty);wall.scrollTo({top:wall.scrollHeight,behavior:'smooth'});
+      setTimeout(()=>{ if(!live())return; ty.remove(); $('#cst').textContent='online';
+        const m={from:'in',text:txt,t:hhmm()}; chatState.log.push(m); addMsg(m); beep('in'); chatState.i++; runStep(); },delay);
+    }, chatState.log.length?320:650);
+  } else if(st.ask){
+    const qr=$('#qr'); const cin=$('#cin'), cs=$('#csend');
+    qr.innerHTML=st.opts.map(o=>`<button data-cr="${esc(o)}">${esc(o)}</button>`).join('')+(st.other?`<button class="qo" data-own="1">✏️ Ketik sendiri</button>`:'');
+    const fld=cin.parentElement; fld.classList.toggle('own',!!st.other);
+    cin.disabled=!st.other; cin.placeholder=st.other?'✏️ Atau ketik jawaban sendiri…':'Pilih salah satu balasan di atas'; cin.value='';
+    const send=(text,own)=>{ if(!text.trim())return; qr.innerHTML=''; fld.classList.remove('own','pulse'); cin.value=''; cin.disabled=true; cs.disabled=true; cin.placeholder='Ketik pesan';
+      R[st.ask]=own?'__o':text; if(own) R[st.ask+'_o']=text.trim(); if(st.ask==='REPLY') R.REPLY_code=text.startsWith('Iya')?1:0;
+      const m={from:'out',text:text.trim(),t:hhmm()}; chatState.log.push(m); addMsg(m); beep('out'); chatState.i++; renderData(); runStep(); };
+    qr.querySelectorAll('button[data-cr]').forEach(b=>b.onclick=()=>send(b.dataset.cr,false));
+    const ob=qr.querySelector('[data-own]'); if(ob) ob.onclick=()=>{cin.focus();fld.classList.remove('pulse');void fld.offsetWidth;fld.classList.add('pulse');};
+    cin.oninput=()=>{cs.disabled=!cin.value.trim();};
+    cin.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();send(cin.value,true);}};
+    cs.onclick=()=>send(cin.value,true);
+    setTimeout(()=>{const w=$('#wall');w&&w.scrollTo({top:w.scrollHeight,behavior:'smooth'});},50);
+  } else if(st.close){
+    const yes=R.REPLY_code===1;
+    chatState.steps.splice(chatState.i,1,{in:yes?'Oke, makasih ya udah balas. Nanti aku kabarin lagi.':'Oke, nggak apa-apa. Makasih ya udah balas.'},{end:true});
+    runStep();
+  } else if(st.end){ chatState.done=true; setTimeout(()=>{if(live())showDone(true);},700); }
+}
+function showDone(anim){
+  const wall=$('#wall'); if(!wall)return;
+  const s=document.createElement('div');s.className='sysm';s.textContent='Chat selesai';if(!anim)s.style.animation='none';wall.appendChild(s);
+  $('#qr').innerHTML=''; $('#ib').outerHTML=`<div class="done"><div class="fbtns two"><button class="bk" id="chatprev" aria-label="Kembali"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>Kembali</button><button class="cta" id="chatnext">Lanjut</button></div></div>`;
+  $('#chatprev').onclick=()=>back();
+  const cn=$('#chatnext'); cn.onclick=()=>next();
+  if(anim){let t=3;cn.disabled=true;cn.textContent=`Lanjut (${t})`;const iv=setInterval(()=>{t--;if(!document.body.contains(cn)){clearInterval(iv);return;}if(t<=0){clearInterval(iv);cn.disabled=false;cn.textContent='Lanjut';}else cn.textContent=`Lanjut (${t})`;},1000);}
+  wall.scrollTo({top:wall.scrollHeight,behavior:'smooth'});
+}
+
+/* ================= render & navigation ================= */
+const NOTES={};
+function noteFor(){return '';}
+
+let _pgT0=performance.now(),_pgLast=null;
+function meta(){
+  const now=performance.now(); if(_pgLast){R._pt=R._pt||{};R._pt[_pgLast]=(R._pt[_pgLast]||0)+(now-_pgT0)/1000;} _pgT0=now;
+  const pt=R._pt||{},sum=re=>Math.round(Object.keys(pt).filter(k=>re.test(k)).reduce((a,k)=>a+pt[k],0));
+  if(R._start) R.DUR_TOTAL=Math.round((Date.now()-R._start)/1000);
+  R.T_TASKA=sum(/^a_/); R.T_ANIM=sum(/^a_sum$/); R.T_SCRT=sum(/^scrt\d$/); if(hasF()){R.T_CHAT=sum(/^chat$/); R.T_SCRT_T=sum(/^scrtt\d$/);}
+  R.SOUND_ON=soundOn?1:0;
+  if(COND.a==='rd'&&R.aitems){const n=items().length;R.A_NITEM=n;R.A_NSTOP=items().filter((_,i)=>R['ast'+i]==='Sudah berhenti saja').length;R.A_NOTHERS=items().filter((_,i)=>R['ast'+i]!=='Sudah berhenti saja'&&whoShort(i)&&whoShort(i)!=='sendiri').length;}
+}
+const SAVE_KEY='studi3_progress';
+function saveProg(){try{if(['welcome','end','declined','noelig'].includes(cur)){if(cur!=='welcome')localStorage.removeItem(SAVE_KEY);return;}localStorage.setItem(SAVE_KEY,JSON.stringify({R,cur,COND,ts:Date.now()}));}catch(e){}}
+function loadProg(){try{const sv=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!sv||!sv.cur||Date.now()-sv.ts>48*3600e3)return false;
+  Object.assign(COND,sv.COND);R=sv.R;window._resumed=true;if(!R.PID)R.PID=newPid();if(!R.CODE)R.CODE=newCode();R.RESUME_N=(R.RESUME_N||0)+1;cur=sv.cur;
+  if(cur==='chat')cur='chat_i';            // chat diulang dari awal
+  if(cur==='a_sum')delete R._sumOk;        // animasi ditonton ulang penuh
+  return true;}catch(e){return false;}}
+function render(dir=1){
+  meta();
+  const f=flow(); if(!f.includes(cur)) cur=f[0]; _pgLast=cur;
+  const pg=page(cur); const i=f.indexOf(cur);
+  const old=$('#chat'); if(old&&!pg.chat) old.remove();
+  const sec=secOf(cur); const secName=sec?SECS.find(s=>s[0]===sec)[1]:'';
+  $('#sectitle').textContent=cur==='welcome'?'Survei pengalaman berkelompok':cur==='end'?'Selesai':secName;
+  {const pc=Math.round(i/(f.length-1)*100);$('#progfill').style.width=pc+'%';$('#progpct').textContent=pc+'%';}
+  $('#back').hidden=!!pg.noBack||i===0||cur==='end';
+  const c=$('#content'); c.classList.remove('enter'); void c.offsetWidth; c.classList.add('enter');
+  c.innerHTML=pg.body; c.scrollTop=0;
+  renderFoot(pg);
+  bind(c);
+  visBind();
+  if(pg.chat) chatStart();
+  if(cur==='debrief'){const w=$('#wd');if(w)w.onclick=()=>{R.WITHDRAW=1;SFX.tap();next();};}
+  if(cur==='end'&&R.WITHDRAW){$('#content').querySelector('h2').textContent='Data Anda tidak akan dipakai';$('#content').querySelector('p').textContent='Jawaban Anda sudah ditandai untuk dihapus. Terima kasih atas waktu Anda.';}
+  if(cur==='a_sum'){ startSumTimer(); runJourney(); const rp=$('#replay'); if(rp) rp.onclick=()=>{R.REPLAY_N=(R.REPLAY_N||0)+1;document.querySelectorAll('.jcap,.jsum').forEach(e=>e.classList.remove('in'));$('.journey').innerHTML=COND.a==='rd'?journeyRD():journeyK();runJourney();}; } else { clearSumTimer(); cancelJourney(); }
+  if(dir>0&&/^s[245]$/.test(cur)){setTimeout(()=>{confetti();SFX.success();haptic(25);},120);}
+  if(dir>0&&cur==='end'){setTimeout(()=>{confetti(90);SFX.fanfare();haptic(40);},150);}
+  saveProg(); syncData();
+}
+function renderFoot(pg){
+  const ft=$('#foot');
+  const canBack=!['welcome','end','declined'].includes(cur);
+  if(pg.chat||(pg.btn===null&&!canBack)){ft.innerHTML='';ft.style.display='none';return;}
+  ft.style.display='';
+  const bk=canBack?`<button class="bk" id="backbtn" aria-label="Kembali"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Kembali</button>`:'';
+  const nx=pg.btn===null?'':`<button class="cta" id="nextbtn">${pg.btn||'Lanjut'}</button>`;
+  ft.innerHTML=`<div class="fbtns ${bk&&nx?'two':''}">${bk}${nx}</div>${pg.timer?'<div class="timer" id="tmr"></div>':''}`;
+  if(nx) $('#nextbtn').onclick=()=>{SFX.tap();next();};
+  if(bk) $('#backbtn').onclick=()=>back();
+  updBtn();
+}
+function updBtn(){document.querySelectorAll('#content .tx:not(select):not(textarea)').forEach(i=>i.classList.toggle('valid',!!i.value.trim()&&!i.disabled));const b=$('#nextbtn');if(!b)return;const pg=page(cur);const ok=!!pg.ok();if(b._was===false&&ok){b.classList.remove('ready');void b.offsetWidth;b.classList.add('ready');}b._was=ok;b.disabled=!ok;}
+function next(){
+  const pg=page(cur); if(pg.ok&&!pg.ok()) return;
+  const f=flow(); const i=f.indexOf(cur); if(i<f.length-1){cur=f[i+1];render(1);}
+}
+function back(){const f=flow();const i=f.indexOf(cur);if(i>0&&!['welcome','end'].includes(cur)){R.BACK_N=(R.BACK_N||0)+1;cur=f[i-1];render(-1);}}
+document.addEventListener('visibilitychange',()=>{if(document.hidden){if(/^a_/.test(cur))R.BLUR_A=(R.BLUR_A||0)+1;if(cur==='chat')R.BLUR_B=(R.BLUR_B||0)+1;}});
+$('#back').onclick=back;
+function toggleSound(){soundOn=!soundOn;$('#sfxbtn').textContent=soundOn?'🔊':'🔇';if(!soundOn)SFX.padStop();}
+$('#sfxbtn').onclick=toggleSound;
+function startSumTimer(){
+  clearSumTimer(); if(R._sumOk){updBtn();return;}
+  let t=11; const tick=()=>{const el=$('#tmr'); if(el) el.textContent=t>0?`Tombol aktif dalam ${t} detik`:'';
+    if(t<=0){R._sumOk=true;updBtn();clearSumTimer();return;} t--; };
+  tick(); sumTimer=setInterval(tick,1000);
+}
+function clearSumTimer(){if(sumTimer){clearInterval(sumTimer);sumTimer=null;}}
+
+/* ---------- bindings ---------- */
+function bind(c){
+  c.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.pick,v=b.dataset.v,multi=+b.dataset.multi;
+    if(k==='inc_none_o'){R.inc_none=!R.inc_none; if(R.inc_none){R.income=0; delete R.SAC_UANG; delete R.SAC_UANG_t;} R.inc_none_o=R.inc_none?[v]:[]; return rerender();}
+    if(k==='work_none_o'){const on=R.work==='none'; R.work=on?null:'none'; R.work_none_o=on?[]:[v]; delete R.SAC_KERJA; delete R.SAC_KERJA_t; return rerender();}
+    if(multi){let a=R[k]||[]; if(a.includes(v)) a=a.filter(x=>x!==v); else { if(a.length>=multi){flash(c,`Maksimal ${multi} pilihan`);return;} a=[...a,v]; } R[k]=a;}
+    else R[k]=v;
+    { const on=multi?(R[k]||[]).includes(v):true; if(on){SFX.select();haptic(10);} else SFX.tap(); }
+    if(k==='aitems'){delete R.A_CONF;}
+    if(k==='fb'&&v!=='Ya, punya'){/* keep */}
+    if(k==='A_CONF'&&v.startsWith('Bukan')){R.A_CONF_EDIT=(R.A_CONF_EDIT||0)+1;delete R.A_CONF;setTimeout(()=>{cur='a_items';render(-1);},250);return;}
+    rerender(); { const nb=$('#content').querySelector(`[data-pick="${k}"][data-v="${CSS.escape(v)}"]`); nb&&nb.classList.add('just'); }
+    if(v==='__o'||(b.closest('.opts')&&c.querySelector(`.reveal input`)&&(R[k]===v))){const inp=c.querySelector(`[data-text="${k}_o"]`)||c.querySelector('.reveal input');if(inp&&!inp.value){inp.focus();}}
+    if(b.dataset.auto&&v!=='__o') setTimeout(()=>{if(cur&&page(cur).ok())next();},380);
+  });
+  c.querySelectorAll('[data-otext]').forEach(inp=>{
+    const k=inp.dataset.otext,multi=+inp.dataset.multi,lab=inp.closest('.opo');
+    inp.oninput=()=>{R[k+'_o']=inp.value;const has=inp.value.trim().length>0;
+      if(multi){let a=R[k]||[];if(has&&!a.includes('__o')){if(a.length>=multi){flash(c,`Maksimal ${multi} pilihan`);inp.value='';R[k+'_o']='';return;}a=[...a,'__o'];}if(!has)a=a.filter(x=>x!=='__o');R[k]=a;}
+      else{if(has){R[k]='__o';c.querySelectorAll(`[data-pick="${k}"]`).forEach(b=>b.classList.remove('on','hasrev'));c.querySelectorAll('.reveal').forEach(r=>r.remove());}else if(R[k]==='__o')R[k]=null;}
+      lab.classList.toggle('on',has);updBtn();renderData();};
+    inp.onblur=()=>{if(inp.value.trim()){SFX.select();haptic(6);}};
+  });
+  c.querySelectorAll('[data-text]').forEach(inp=>{inp.oninput=()=>{let v=inp.value; if(inp.dataset.text==='finit'){v=v.toUpperCase();inp.value=v;} R[inp.dataset.text]=v; updBtn(); renderData();};});
+  c.querySelectorAll('[data-money]').forEach(inp=>{inp.oninput=()=>{const n=parseInt(inp.value.replace(/\D/g,''))||0;R.income=n;inp.value=n?n.toLocaleString('id-ID'):'';updBtn();renderData();};});
+  c.querySelectorAll('[data-num2]').forEach(inp=>{inp.oninput=()=>{inp.value=inp.value.replace(/\D/g,'');R[inp.dataset.num2]=inp.value;updBtn();renderData();};});
+  c.querySelectorAll('[data-sel]').forEach(s=>{s.onchange=()=>{R[s.dataset.sel]=s.value;updBtn();renderData();};});
+  c.querySelectorAll('[data-num]').forEach(b=>b.onclick=()=>{const k=b.dataset.num;R[k]=b.dataset.v;SFX.select();haptic(10);
+    const map={work:['SAC_KERJA'],fam:['SAC_KEL'],sleep:['SAC_TIDUR']}[k];map.forEach(x=>{delete R[x];delete R[x+'_t'];});
+    if(k==='work'){R.work_none_o=[];} rerender(); });
+  c.querySelectorAll('[data-lk]').forEach(b=>b.onclick=()=>{R[b.dataset.lk]=+b.dataset.v;SFX.select();haptic(10);c.querySelectorAll('[data-lk]').forEach(x=>x.classList.toggle('on',x===b));renderData();setTimeout(()=>{if(page(cur).ok())next();},350);});
+  c.querySelectorAll('[data-rng]').forEach(r=>{r.oninput=()=>{const k=r.dataset.rng;if(+r.value!==R[k]){SFX.tick();haptic(3);}R[k]=+r.value;R[k+'_t']=true;r.classList.remove('untouched');r.style.setProperty('--p',(r.value/r.max*100)+'%');updSac(k);updBtn();renderData();};});
+  c.querySelectorAll('[data-wheel]').forEach(w=>initWheel(w));
+  c.querySelectorAll('[data-wstep]').forEach(b=>b.onclick=()=>{const w=c.querySelector(`[data-wheel="${b.dataset.wstep}"]`);const l=w.querySelector('.wl');l.scrollBy({top:-44*b.dataset.d,behavior:'smooth'});});
+  c.querySelectorAll('[data-fus]').forEach(f=>initFus(f));
+}
+function flash(c,msg){let t=c.querySelector('.flash');if(!t){t=document.createElement('div');t.className='flash';t.style.cssText='position:sticky;bottom:8px;margin:8px auto 0;width:max-content;background:#1a2421;color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px';c.appendChild(t);}t.textContent=msg;clearTimeout(t._h);t._h=setTimeout(()=>t.remove(),1600);}
+function rerender(){const c=$('#content');const st=c.scrollTop;const focusKey=document.activeElement&&document.activeElement.dataset?document.activeElement.dataset.text:null;c.innerHTML=page(cur).body;bind(c);c.scrollTop=st;updBtn();renderData();if(focusKey){const i=c.querySelector(`[data-text="${focusKey}"]`);if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}}}
+function updSac(k){
+  const bn=$('#bn'),bs=$('#bs'),vz=$('#viz');
+  if(k==='SAC_UANG'){bn.textContent=R[k]+'%';bs.textContent=`≈ ${fmtRp(R.income*R[k]/100)} dari ${fmtRp(R.income)}`;vz.innerHTML=vizMoney();}
+  if(k==='SAC_KERJA'){bn.textContent=R[k]+' hari';bs.textContent=`${pct(R[k],R.work)}% dari ${R.work} hari kerja`;vz.innerHTML=vizDays(k,+R.work,'💼');}
+  if(k==='SAC_KEL'){bn.textContent=R[k]+' hari';bs.textContent=`${pct(R[k],R.fam)}% dari ${R.fam} hari bersama keluarga`;vz.innerHTML=vizDays(k,+R.fam,'🏠');}
+  if(k==='SAC_TIDUR'){bn.textContent=fmtH(R[k])+' jam';bs.textContent=`${pct(R[k],R.sleep)}% dari ${R.sleep} jam tidur`;vz.innerHTML=vizSleep();}
+}
+function initWheel(w){
+  const key=w.dataset.wheel,l=w.querySelector('.wl'),its=[...l.querySelectorAll('.wi')],H=44;
+  const idxOf=y=>its.findIndex(e=>+e.dataset.y===+y);
+  let lastK=-1,ready=false;const setSel=()=>{const k=Math.round(l.scrollTop/H);if(k!==lastK){its.forEach((e,j)=>e.classList.toggle('sel',j===k));if(ready&&lastK!==-1){SFX.tick();haptic(3);}lastK=k;}return k;};
+  l.scrollTop=Math.max(0,idxOf(R[key]))*H; setSel(); setTimeout(()=>ready=true,150);
+  let tmo; l.addEventListener('scroll',()=>{const k=setSel();clearTimeout(tmo);tmo=setTimeout(()=>{const k2=setSel();if(its[k2]){R[key]=+its[k2].dataset.y;updBtn();renderData();}},90);},{passive:true});
+  its.forEach((e,j)=>e.onclick=()=>{if(moved)return;l.scrollTo({top:j*H,behavior:'smooth'});});
+  let down=false,y0=0,s0=0,moved=false,lastY=0,lastT=0,vel=0;
+  l.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;y0=e.clientY;s0=l.scrollTop;lastY=e.clientY;lastT=performance.now();l.classList.add('drag');l.setPointerCapture(e.pointerId);});
+  l.addEventListener('pointermove',e=>{if(!down)return;const dy=e.clientY-y0;if(Math.abs(dy)>3)moved=true;l.scrollTop=s0-dy;const t=performance.now();vel=(e.clientY-lastY)/(t-lastT||1);lastY=e.clientY;lastT=t;});
+  const up=()=>{if(!down)return;down=false;l.classList.remove('drag');const target=Math.round((l.scrollTop-vel*120)/H)*H;l.scrollTo({top:Math.max(0,Math.min(target,(its.length-1)*H)),behavior:'smooth'});setTimeout(()=>moved=false,50);};
+  l.addEventListener('pointerup',up);l.addEventListener('pointercancel',up);
+  l.addEventListener('keydown',e=>{if(e.key==='ArrowUp'){e.preventDefault();l.scrollBy({top:-H,behavior:'smooth'});}if(e.key==='ArrowDown'){e.preventDefault();l.scrollBy({top:H,behavior:'smooth'});}});
+}
+function initFus(f){
+  const key=f.dataset.fus,me=f.querySelector('.me');
+  const W=()=>f.clientWidth, gx=()=>W()-6-160, maxX=()=>gx()+40; // full overlap: center of me at center of group
+  const posFor=v=>(v-1)/4*maxX();
+  const setX=x=>{me.style.transform=`translateX(${x}px)`;};
+  if(R[key]) setX(posFor(R[key])); else setX(0);
+  let drag=false,sx=0,ox=0,cx=R[key]?posFor(R[key]):0;
+  me.addEventListener('pointerdown',e=>{drag=true;me.classList.remove('snap');sx=e.clientX;ox=cx;me.setPointerCapture(e.pointerId);});
+  let lv=0;me.addEventListener('pointermove',e=>{if(!drag)return;cx=Math.max(0,Math.min(maxX(),ox+e.clientX-sx));setX(cx);const v=1+Math.round(cx/maxX()*4);if(v!==lv){if(lv)SFX.tick();lv=v;}$('#fushint').innerHTML=fusLabel(v);});
+  const up=()=>{if(!drag)return;drag=false;SFX.select();haptic(12);const v=1+Math.round(cx/maxX()*4);R[key]=v;cx=posFor(v);me.classList.add('snap');setX(cx);me.setAttribute('aria-valuenow',v);$('#fushint').innerHTML=fusLabel(v);updBtn();renderData();};
+  me.addEventListener('pointerup',up);me.addEventListener('pointercancel',up);
+  me.addEventListener('keydown',e=>{let v=R[key]||1;if(e.key==='ArrowRight')v=Math.min(5,v+1);else if(e.key==='ArrowLeft')v=Math.max(1,v-1);else return;e.preventDefault();R[key]=v;cx=posFor(v);me.classList.add('snap');setX(cx);$('#fushint').innerHTML=fusLabel(v);updBtn();renderData();});
+}
+
+function renderPanel(){}
+function restart(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}R={_start:Date.now(),DEVICE:matchMedia('(pointer:coarse)').matches?'mobile':'desktop',PID:newPid(),CODE:newCode()};_pgLast=null;chatState=null;cur='welcome';clearSumTimer();render();}
+function mean(a){a=a.filter(x=>x!=null&&!isNaN(x));return a.length?(a.reduce((s,x)=>s+x,0)/a.length):null;}
+function renderData(){}
+
+/* ================= pengiriman data ke Google Sheet ================= */
+const SYNC_AT=new Set(['s2','s3','s4','s5','debrief','end','noelig','declined']);
+const PEND_KEY='studi3_pending';
+function flatRow(){
+  const st=cur==='end'?'complete':cur==='noelig'?'noelig':cur==='declined'?'declined':'partial';
+  const o={PID:R.PID,STATUS:st,KOND_A:COND.a==='rd'?'RD':'Kontrol',KOND_B:hasF()?(COND.b==='of'?'Tawaran':'Netral'):'',LAST_PAGE:cur,CODE:R.CODE,
+    WEB_VERSION,CLIENT_TS:new Date().toISOString(),START_TS:R._start?new Date(R._start).toISOString():'',
+    UA:navigator.userAgent,SCREEN:screen.width+'x'+screen.height,TZ:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),
+    SRC:(window.__INIT&&window.__INIT.src)||''};
+  const skip=new Set(['_sumOk','_half','_start','_condLocked','inc_none_o','work_none_o','PID','CODE']);
+  Object.keys(R).forEach(k=>{if(skip.has(k))return;let v=R[k];if(v==null||v==='')return;
+    if(k==='_pt'){o.PAGE_TIMES=JSON.stringify(Object.fromEntries(Object.entries(v).map(([a,b])=>[a,Math.round(b*10)/10])));return;}
+    if(Array.isArray(v))v=v.join(' | ');else if(typeof v==='object')v=JSON.stringify(v);else if(typeof v==='boolean')v=v?1:0;
+    o[k]=v;});
+  if(chatState&&chatState.log&&chatState.log.length)o.CHAT_LOG=chatState.log.map(m=>(m.from==='in'?'T: ':'P: ')+m.text).join(' || ');
+  return o;
+}
+function setSendSt(t){const el=document.getElementById('sendst');if(el)el.textContent=t;}
+let _sendBusy=false,_sendAgain=false,_retryT=null,_retryN=0;
+function transport(json,ok,fail){
+  if(window.google&&google.script&&google.script.run){google.script.run.withSuccessHandler(ok).withFailureHandler(fail).saveResponse(json);return;}
+  const ep=window.__INIT&&window.__INIT.endpoint;
+  if(ep){fetch(ep,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:json,redirect:'follow'}).then(r=>r.json()).then(j=>j&&j.ok?ok():fail()).catch(fail);return;}
+  console.log('[studi3] (tanpa server) data:',JSON.parse(json));setTimeout(ok,50);
+}
+function flushPending(){
+  if(_sendBusy){_sendAgain=true;return;}
+  let json;try{json=localStorage.getItem(PEND_KEY);}catch(e){}
+  if(!json)json=window._pendMem;if(!json)return;
+  _sendBusy=true;
+  transport(json,()=>{_sendBusy=false;_retryN=0;try{if(localStorage.getItem(PEND_KEY)===json)localStorage.removeItem(PEND_KEY);}catch(e){}if(window._pendMem===json)window._pendMem=null;
+      setSendSt('✓ Tersimpan');if(_sendAgain){_sendAgain=false;flushPending();}},
+    ()=>{_sendBusy=false;_retryN++;setSendSt('Belum tersambung, mencoba mengirim lagi… Mohon jangan tutup halaman ini dulu.');
+      clearTimeout(_retryT);_retryT=setTimeout(flushPending,Math.min(60000,3000*Math.pow(2,_retryN-1)));});
+}
+function syncData(){
+  if(cur==='s2'&&!R._condLocked){R._condLocked=true;if(!R.COND_SRC)R.COND_SRC=(window.__INIT&&window.__INIT.cond)?'server':'local';}
+  if(!SYNC_AT.has(cur))return;
+  const json=JSON.stringify(flatRow());
+  window._pendMem=json;try{localStorage.setItem(PEND_KEY,json);}catch(e){}
+  if(cur==='end')setSendSt('Menyimpan…');
+  flushPending();
+}
+window.addEventListener('online',flushPending);
+(function(){const I=window.__INIT||{};if(!I.endpoint||I.cond)return;
+  fetch(I.endpoint+'?api=assign',{cache:'no-store',redirect:'follow'}).then(r=>r.json()).then(j=>{
+    if(j&&j.cond&&!R._condLocked&&!window._resumed){COND.a=j.cond.a;COND.b=j.cond.b;R.COND_SRC='server';}}).catch(()=>{});})();
+setInterval(()=>{$('#clock').textContent=hhmm();},10000); $('#clock').textContent=hhmm();
+setTimeout(flushPending,800);
+if(loadProg()){render();setTimeout(()=>toast('Melanjutkan dari layar terakhir Anda'),400);} else render();
+</script>
+</body>
+</html>
